@@ -1,0 +1,28 @@
+{
+  "name": "next-test",
+  "version": "1.0.0",
+  "description": "Test Next.js app",
+  "main": "index.js",
+  "author": "Nieky Allen",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node server.js",
+    "build": "next build && NODE_ENV=production node server.js",
+    "export": "next export"
+  },
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "morgan": "^1.9.1",
+    "next": "^7.0.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-icons": "^3.2.2",
+    "react-scroll-to-component": "^1.0.2",
+    "react-visibility-sensor": "^5.0.2"
+  }
+}
