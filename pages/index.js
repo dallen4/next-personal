@@ -1,10 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
 import VisibilitySensor from 'react-visibility-sensor';
+import ScrollIndicatorPage from '../components/ScrollIndicatorPage';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { IoLogoNodejs, IoLogoJavascript } from 'react-icons/io';
 import '../styles/base.css';
 import '../styles/index.css';
+import { styles } from '../styles';
 
 let scrollToComponent = () => {};
 let innerHeight = 400;
@@ -16,10 +18,12 @@ export default class Home extends React.Component {
         super(props);
 
         this.state = {
-            activeSection: 'home'
+            activeSection: 'home',
+            isScrolling: false,
         };
 
         this.updateActiveSection = this.updateActiveSection.bind(this);
+        this.backToTop = this.backToTop.bind(this);
 
     }
 
@@ -30,30 +34,51 @@ export default class Home extends React.Component {
     }
 
     updateActiveSection = (isVisible, section) => {
+        // console.log(Date.now(), ' ', this.state.isScrolling)
+
+        if (this.state.isScrolling)
+            return;
+
         if (isVisible) {
-            scrollToComponent(this[section], { duration: 500 });
+            // scrollToComponent(this[section], { duration: 500 });
             this.setState({ activeSection: section });
         }
     };
 
+    backToTop = () => {
+        this.setState({ isScrolling: true }, () => {
+            // console.log(Date.now(), ' ', this.state.isScrolling)
+            scrollToComponent(this.home, { duration: 500 });
+            setTimeout(this.setState({
+                activeSection: 'home',
+                isScrolling: false,
+            }), 5000);
+        });
+    };
+
     render() {
 
-        let { innerHeight, activeSection } = this.state;
+        let { activeSection } = this.state;
 
         let sensorConfig = {
             partialVisibility: true,
             offset: {
-                top: innerHeight * 0.25,
-                bottom: innerHeight * 0.25,
+                top: innerHeight * 0.55,
+                bottom: innerHeight * 0.55,
             },
         };
 
+        let backToTopButtonStyles = {
+            ...styles.backTopButton,
+            display: activeSection !== 'home' ? 'block' : 'none',
+        };
+
         return (
-            <div>
+            <ScrollIndicatorPage>
                 <Head>
                     <title>Nieky Allen</title>
                 </Head>
-                <div style={{ width: '80%', marginLeft: '10%', marginRight: '10%', paddingTop: '15px', position: 'fixed', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }} >
+                <div style={styles.navContainer} >
                     <p
                         onClick={() => scrollToComponent(this.about)}
                         className="nav-link"
@@ -75,12 +100,13 @@ export default class Home extends React.Component {
                         projects
                     </p>
                 </div>
-                <FiChevronUp
-                    onClick={() => scrollToComponent(this.home)}
-                    style={{ display: activeSection !== 'home' ? 'block' : 'none', position: 'fixed', bottom: 0, right: 0 }}
-                    size={45}
-                    color="white"
-                />
+                <div style={backToTopButtonStyles} >
+                    <FiChevronUp
+                        onClick={this.backToTop}
+                        size={45}
+                        color="white"
+                    />
+                </div>
                 <VisibilitySensor
                     {...sensorConfig}
                     onChange={isVisible => this.updateActiveSection(isVisible, 'home')}
@@ -90,11 +116,11 @@ export default class Home extends React.Component {
                         className="fullscreen-container parallax-bg"
                         style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a20bc6324f6ef2969d9a7cae56b8d4d1&auto=format&fit=crop&w=1000&q=95")' }}
                     >
-                        <div style={{ height: '100%', width: '100%', backgroundColor: 'rgba(0.2, 0.3, 2, 0.7)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }} >
-                            <div style={{ height: '50%', marginTop: '15%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }} >
-                                <h1 style={{ color: 'rgb(22, 175, 101)' }} >hey, I'm Nieky.</h1>
-                                <h3 style={{ color: 'rgb(28, 109, 161)' }} >thanks for checking out my site</h3>
-                                <h2 style={{ color: 'rgb(252, 154, 31)' }} >Software Engineer</h2>
+                        <div style={styles.HomeSectionContentContainer} >
+                            <div style={{ height: '50%', marginTop: '0%', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                                <h1 style={styles.HomeSectionH1} >hey, I'm Nieky.</h1>
+                                <h3 style={styles.HomeSectionH3} >thanks for checking out my site</h3>
+                                <h2 style={styles.HomeSectionH2} >Software Engineer</h2>
                             </div>
                             <FiChevronDown
                                 onClick={() => window.scrollTo(0, window.innerHeight)}
@@ -142,7 +168,7 @@ export default class Home extends React.Component {
                         </div>
                     </div>
                 </VisibilitySensor>
-            </div>
+            </ScrollIndicatorPage>
         )
     }
 }
