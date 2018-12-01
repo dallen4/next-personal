@@ -2,12 +2,19 @@ import React from 'react';
 import Head from 'next/head';
 import VisibilitySensor from 'react-visibility-sensor';
 import ScrollIndicatorPage from '../components/ScrollIndicatorPage';
+import { Transition } from 'react-spring';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { IoLogoNodejs, IoLogoJavascript } from 'react-icons/io';
+import {
+    IoLogoNodejs,
+    IoLogoJavascript,
+    IoLogoCss3,
+    IoLogoHtml5,
+} from 'react-icons/io';
 import '../styles/base.css';
 import '../styles/index.css';
 import { styles } from '../styles';
 
+// init with default values to compensate for SSR
 let scrollToComponent = () => {};
 let innerHeight = 400;
 
@@ -20,34 +27,44 @@ export default class Home extends React.Component {
         this.state = {
             activeSection: 'home',
             isScrolling: false,
+            sectionsLoaded: ['home'],
         };
 
         this.updateActiveSection = this.updateActiveSection.bind(this);
         this.backToTop = this.backToTop.bind(this);
+        this.renderNavLinks = this.renderNavLinks.bind(this);
 
     }
 
     componentDidMount() {
+        // declare new values when mounted on client side
         scrollToComponent = require('react-scroll-to-component');
         if (window)
             innerHeight = window.innerHeight;
     }
 
     updateActiveSection = (isVisible, section) => {
-        // console.log(Date.now(), ' ', this.state.isScrolling)
+
+        let {  sectionsLoaded } = this.state;
 
         if (this.state.isScrolling)
             return;
 
         if (isVisible) {
-            // scrollToComponent(this[section], { duration: 500 });
-            this.setState({ activeSection: section });
+
+            if (!sectionsLoaded.includes(section))
+                sectionsLoaded.push(section);
+
+            this.setState({
+                activeSection: section,
+                sectionsLoaded,
+            });
+
         }
     };
 
     backToTop = () => {
         this.setState({ isScrolling: true }, () => {
-            // console.log(Date.now(), ' ', this.state.isScrolling)
             scrollToComponent(this.home, { duration: 500 });
             setTimeout(this.setState({
                 activeSection: 'home',
@@ -56,9 +73,55 @@ export default class Home extends React.Component {
         });
     };
 
-    render() {
+    renderNavLinks() {
 
         let { activeSection } = this.state;
+
+        let navLinks = [
+            {
+                key: 'home',
+                label: 'home',
+            },
+            {
+                key: 'about',
+                label: 'about',
+            },
+            {
+                key: 'tech',
+                label: 'technologies',
+            },
+            {
+                key: 'projects',
+                label: 'projects',
+            }
+        ];
+
+        return navLinks.map(({ key, label }) => {
+
+            if (key === 'home')
+                return;
+
+            return (
+                <p
+                    key={key}
+                    onClick={() => scrollToComponent(this[key])}
+                    className="nav-link"
+                    style={{
+                        ...styles.navLink,
+                        textDecoration: activeSection === key ?
+                            'underline' : 'none',
+                    }}
+                >
+                    {label}
+                </p>
+            );
+        });
+
+    }
+
+    render() {
+
+        let { activeSection, sectionsLoaded, } = this.state;
 
         let sensorConfig = {
             partialVisibility: true,
@@ -77,32 +140,14 @@ export default class Home extends React.Component {
             <ScrollIndicatorPage>
                 <Head>
                     <title>Nieky Allen</title>
-                    <meta charset="utf-8"/>
+                    <meta charSet="utf-8"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
                     <meta name="theme-color" content="#000000"/>
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                    <meta name="description" content="personal website for Nieky Allen" />
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                 </Head>
                 <div style={styles.navContainer} >
-                    <p
-                        onClick={() => scrollToComponent(this.about)}
-                        className="nav-link"
-                        style={{ display: 'inline-block', padding: '4px', backgroundColor: 'white', borderRadius: '4px', textDecoration: activeSection === 'about' ? 'underline' : 'none' }}
-                    >
-                        about
-                    </p>
-                    <p
-                        onClick={() => scrollToComponent(this.tech)}
-                        className="nav-link"
-                        style={{ display: 'inline-block', padding: '4px', backgroundColor: 'white', borderRadius: '4px', textDecoration: activeSection === 'tech' ? 'underline' : 'none' }}
-                    >
-                        technologies
-                    </p>
-                    <p
-                        className="nav-link"
-                        style={{ display: 'inline-block', padding: '4px', backgroundColor: 'white', borderRadius: '4px' }}
-                    >
-                        projects
-                    </p>
+                    {this.renderNavLinks()}
                 </div>
                 <div style={backToTopButtonStyles} >
                     <FiChevronUp
@@ -138,18 +183,33 @@ export default class Home extends React.Component {
                     {...sensorConfig}
                     onChange={isVisible => this.updateActiveSection(isVisible, 'about')}
                 >
-                    <div
+                    {({isVisible}) => (
+                        <div
                         ref={ref => this.about = ref}
                         id="about"
                         className="fullscreen-container"
                         style={{ backgroundColor: 'rgb(28, 109, 161)' }}
                     >
-                        <h1 style={{ margin: 0 }} >more about me</h1>
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >Volt Compiler</h2>
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >RealMark</h2>
-                        </div>
+                        <Transition
+                            items={isVisible || sectionsLoaded.includes('about')}
+                            from={{ opacity: 0 }}
+                            enter={{ opacity: 1 }}
+                            leavel={{ opacity: 0 }}
+                        >
+                            {isVisible => 
+                                isVisible && (({ opacity }) => (
+                                    <div style={{ opacity, height: '100%', width: '100%', backgroundColor: 'transparent', }} >
+                                        <h1 style={{ margin: 0 }} >more about me</h1>
+                                        <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
+                                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >Volt Compiler</h2>
+                                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >RealMark</h2>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </Transition>
                     </div>
+                    )}
                 </VisibilitySensor>
                 <VisibilitySensor
                     {...sensorConfig}
@@ -164,10 +224,10 @@ export default class Home extends React.Component {
                         <div style={{ height: '100%', width: '100%', backgroundColor: 'rgba(0.2, 0.3, 2, 0.5)' }} >
                             <h1 style={{ margin: 0, padding: '25px', color: 'rgb(22, 175, 101)', textAlign: 'center' }} >technologies</h1>
                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >AXLRY</h2>
                             <IoLogoJavascript color="white" size={45} />
                             <IoLogoNodejs color="white" size={45} />
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >Bigger Than Basketball</h2>
+                            <IoLogoHtml5 color="white" size={45} />
+                            <IoLogoCss3 color="white" size={45} />
                             </div>
                         </div>
                     </div>

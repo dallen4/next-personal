@@ -9,6 +9,12 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
+    navLink: {
+        display: 'inline-block',
+        padding: '4px',
+        backgroundColor: 'white',
+        borderRadius: '4px',
+    },
     backTopButton: {
         position: 'fixed',
         bottom: 0,
@@ -16,7 +22,7 @@ const styles = {
         marginBottom: '8px',
         borderTopLeftRadius: '5px',
         borderBottomLeftRadius: '5px',
-        backgroundColor: 'rgba(51,54,57,0.6)'
+        backgroundColor: 'rgba(51,54,57,0.6)',
     },
     HomeSectionContentContainer: {
         height: '100%',
@@ -28,13 +34,13 @@ const styles = {
         alignItems: 'center',
     },
     HomeSectionH1: {
-        color: 'rgb(22, 175, 101)'
+        color: 'rgb(22, 175, 101)',
     },
     HomeSectionH2: {
-        color: 'rgb(28, 109, 161)'
+        color: 'rgb(28, 109, 161)',
     },
     HomeSectionH3: {
-        color: 'rgb(252, 154, 31)'
+        color: 'rgb(252, 154, 31)',
     },
 };
 
