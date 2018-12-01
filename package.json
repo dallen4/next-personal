@@ -24,5 +24,9 @@
     "react-icons": "^3.2.2",
     "react-scroll-to-component": "^1.0.2",
     "react-visibility-sensor": "^5.0.2"
+  },
+  "engines": {
+    "node": "10.2.1",
+    "yarn": "1.5.1"
   }
 }
