@@ -77,6 +77,10 @@ export default class Home extends React.Component {
             <ScrollIndicatorPage>
                 <Head>
                     <title>Nieky Allen</title>
+                    <meta charset="utf-8"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+                    <meta name="theme-color" content="#000000"/>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
                 </Head>
                 <div style={styles.navContainer} >
                     <p
