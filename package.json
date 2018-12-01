@@ -25,6 +25,7 @@
     "react-dom": "^16.6.3",
     "react-icons": "^3.2.2",
     "react-scroll-to-component": "^1.0.2",
+    "react-spring": "^6.1.10",
     "react-visibility-sensor": "^5.0.2"
   },
   "engines": {
