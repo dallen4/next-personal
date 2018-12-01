@@ -1,0 +1,66 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:chownr:20180731':
+    - node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > terser-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > babel-loader > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > friendly-errors-webpack-plugin > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - '@zeit/next-css > mini-css-extract-plugin > webpack > uglifyjs-webpack-plugin > cacache > chownr':
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > webpack-dev-middleware > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > webpackbar > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - '@zeit/next-css > css-loader > webpack > uglifyjs-webpack-plugin > cacache > chownr':
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.730Z'
+    - next > autodll-webpack-plugin > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > terser-webpack-plugin > webpack > uglifyjs-webpack-plugin > cacache > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - '@zeit/next-css > css-loader > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr':
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - '@zeit/next-css > mini-css-extract-plugin > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr':
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > autodll-webpack-plugin > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > babel-loader > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > friendly-errors-webpack-plugin > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > terser-webpack-plugin > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > webpack-dev-middleware > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+    - next > webpackbar > webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: 'Too far down dependency tree, updating risks breaking API changes'
+        expires: '2018-12-31T02:55:10.731Z'
+patch: {}
