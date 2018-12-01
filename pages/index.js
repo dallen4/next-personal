@@ -6,7 +6,8 @@ import { IoLogoNodejs, IoLogoJavascript } from 'react-icons/io';
 import '../styles/base.css';
 import '../styles/index.css';
 
-let scrollToComponent;
+let scrollToComponent = () => {};
+let innerHeight = 400;
 
 export default class Home extends React.Component {
 
@@ -15,7 +16,6 @@ export default class Home extends React.Component {
         super(props);
 
         this.state = {
-            innerHeight: 400,
             activeSection: 'home'
         };
 
@@ -26,12 +26,14 @@ export default class Home extends React.Component {
     componentDidMount() {
         scrollToComponent = require('react-scroll-to-component');
         if (window)
-            this.setState({ innerHeight: window.innerHeight });
+            innerHeight = window.innerHeight;
     }
 
     updateActiveSection = (isVisible, section) => {
-        if (isVisible)
+        if (isVisible) {
+            scrollToComponent(this[section], { duration: 500 });
             this.setState({ activeSection: section });
+        }
     };
 
     render() {
@@ -41,8 +43,8 @@ export default class Home extends React.Component {
         let sensorConfig = {
             partialVisibility: true,
             offset: {
-                top: innerHeight * 0.55,
-                bottom: innerHeight * 0.55,
+                top: innerHeight * 0.25,
+                bottom: innerHeight * 0.25,
             },
         };
 
