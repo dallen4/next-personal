@@ -35,9 +35,10 @@ app.prepare().then(() => {
     let logMode = dev ? 'dev' : 'combined';
     server.use(morgan(logMode));
 
-    server.get('/', (req, res) => {
-        renderWithCache(req, res, '/');
-    });
+    if (!dev)
+        server.get('/', (req, res) => {
+            renderWithCache(req, res, '/');
+        });
 
     server.get('*', (req, res) => {
         return handler(req, res);
