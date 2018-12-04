@@ -22,3 +22,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.button:hover {
+    cursor: pointer;
+}
