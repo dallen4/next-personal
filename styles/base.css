@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700,800');
 
 body {
     top: 0;
@@ -9,6 +10,10 @@ body {
     width: 100%;
     font-family: 'Montserrat', 'Open Sans', monospace;
     background-color: rgb(51, 54, 57);
+}
+
+.code {
+    font-family: 'Source Code Pro', monospace;
 }
 
 .fullscreen-container {
