@@ -7,23 +7,25 @@ export default class ScrollIndicatorPage extends Component {
 
         this.state = {
             interpolatedValue: `0%`,
+            horizontal: true,
         };
 
         this.handleScroll = this.handleScroll.bind(this);
     }
 
     static propTypes = {
-        horizontal: PropTypes.bool,
         customStyles: PropTypes.object,
     };
 
     static defaultProps = {
-        horizontal: true,
         customStyles: {},
     };
     
     componentDidMount() {
         this.handleScroll();
+        this.setState({
+            horizontal: window.innerWidth > 800 ? true : false,
+        });
     }
 
     handleScroll() {
@@ -43,15 +45,15 @@ export default class ScrollIndicatorPage extends Component {
 
     render() {
 
-        let { horizontal, customStyles, } = this.props;
-        let { interpolatedValue } = this.state;
+        let { customStyles, } = this.props;
+        let { interpolatedValue, horizontal } = this.state;
 
         let styles = {
             left: 0,
             bottom: 0,
             position: 'fixed',
             height: '3px',
-            width: '3px',
+            width: horizontal ? '3px' : '5px',
             backgroundColor: 'rgb(252, 154, 31)',
             ...customStyles,
         };

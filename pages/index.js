@@ -2,63 +2,132 @@ import React from 'react';
 import Head from 'next/head';
 import VisibilitySensor from 'react-visibility-sensor';
 import ScrollIndicatorPage from '../components/ScrollIndicatorPage';
+import CircleGraph from '../components/CircleGraph';
+import { Transition } from 'react-spring';
+import {
+    FaServer,
+    FaUser,
+    FaDesktop,
+    FaMobileAlt,
+    FaGithub
+} from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { IoLogoNodejs, IoLogoJavascript } from 'react-icons/io';
+import { IoLogoNodejs } from 'react-icons/io';
 import '../styles/base.css';
 import '../styles/index.css';
 import { styles } from '../styles';
+import { colorPalette } from '../config/color';
 
+// init with default values to compensate for SSR
 let scrollToComponent = () => {};
 let innerHeight = 400;
 
 export default class Home extends React.Component {
-
     constructor(props) {
-
         super(props);
 
         this.state = {
             activeSection: 'home',
             isScrolling: false,
+            sectionsLoaded: ['home'],
         };
 
         this.updateActiveSection = this.updateActiveSection.bind(this);
         this.backToTop = this.backToTop.bind(this);
-
+        this.renderMeta = this.renderMeta.bind(this);
+        this.renderNavLinks = this.renderNavLinks.bind(this);
     }
 
     componentDidMount() {
+        // declare new values when mounted on client side
         scrollToComponent = require('react-scroll-to-component');
-        if (window)
-            innerHeight = window.innerHeight;
+        if (window) innerHeight = window.innerHeight;
     }
 
     updateActiveSection = (isVisible, section) => {
-        // console.log(Date.now(), ' ', this.state.isScrolling)
+        let { sectionsLoaded } = this.state;
 
-        if (this.state.isScrolling)
-            return;
+        if (this.state.isScrolling) return;
 
         if (isVisible) {
-            // scrollToComponent(this[section], { duration: 500 });
-            this.setState({ activeSection: section });
+            if (!sectionsLoaded.includes(section))
+                sectionsLoaded.push(section);
+
+            this.setState({
+                activeSection: section,
+                sectionsLoaded,
+            });
         }
     };
 
     backToTop = () => {
         this.setState({ isScrolling: true }, () => {
-            // console.log(Date.now(), ' ', this.state.isScrolling)
             scrollToComponent(this.home, { duration: 500 });
-            setTimeout(this.setState({
-                activeSection: 'home',
-                isScrolling: false,
-            }), 5000);
+            this.setState({ isScrolling: false });
         });
     };
 
-    render() {
+    renderMeta = () => (
+        <Head>
+            <title>Nieky Allen</title>
+            <meta charSet="utf-8" />
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            />
+            <meta name="theme-color" content="#000000" />
+            <meta name="description" content="personal website for Nieky Allen" />
+            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        </Head>
+    );
 
+    renderNavLinks() {
         let { activeSection } = this.state;
+
+        let navLinks = [
+            {
+                key: 'home',
+                label: 'home',
+            },
+            {
+                key: 'about',
+                label: 'about',
+            },
+            {
+                key: 'tech',
+                label: 'technologies',
+            },
+            {
+                key: 'projects',
+                label: 'projects',
+            },
+        ];
+
+        return (
+            <div style={styles.navContainer} >
+                {navLinks.map(({ key, label }) => {
+                    if (key === 'home') return;
+
+                    return (
+                        <p
+                            key={key}
+                            onClick={() => scrollToComponent(this[key], { align: 'top' })}
+                            className="nav-link"
+                            style={{
+                                ...styles.navLink,
+                                textDecoration: activeSection === key ? 'underline' : 'none',
+                            }}
+                        >
+                            {label}
+                        </p>
+                    );
+                })}
+            </div>
+        );
+    }
+
+    render() {
+        let { activeSection, sectionsLoaded } = this.state;
 
         let sensorConfig = {
             partialVisibility: true,
@@ -75,37 +144,11 @@ export default class Home extends React.Component {
 
         return (
             <ScrollIndicatorPage>
-                <Head>
-                    <title>Nieky Allen</title>
-                    <meta charset="utf-8"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-                    <meta name="theme-color" content="#000000"/>
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-                </Head>
-                <div style={styles.navContainer} >
-                    <p
-                        onClick={() => scrollToComponent(this.about)}
-                        className="nav-link"
-                        style={{ display: 'inline-block', padding: '4px', backgroundColor: 'white', borderRadius: '4px', textDecoration: activeSection === 'about' ? 'underline' : 'none' }}
-                    >
-                        about
-                    </p>
-                    <p
-                        onClick={() => scrollToComponent(this.tech)}
-                        className="nav-link"
-                        style={{ display: 'inline-block', padding: '4px', backgroundColor: 'white', borderRadius: '4px', textDecoration: activeSection === 'tech' ? 'underline' : 'none' }}
-                    >
-                        technologies
-                    </p>
-                    <p
-                        className="nav-link"
-                        style={{ display: 'inline-block', padding: '4px', backgroundColor: 'white', borderRadius: '4px' }}
-                    >
-                        projects
-                    </p>
-                </div>
-                <div style={backToTopButtonStyles} >
+                {this.renderMeta()}
+                {this.renderNavLinks()}
+                <div style={backToTopButtonStyles}>
                     <FiChevronUp
+                        className="button"
                         onClick={this.backToTop}
                         size={45}
                         color="white"
@@ -113,66 +156,435 @@ export default class Home extends React.Component {
                 </div>
                 <VisibilitySensor
                     {...sensorConfig}
-                    onChange={isVisible => this.updateActiveSection(isVisible, 'home')}
+                    onChange={(isVisible) => this.updateActiveSection(isVisible, 'home')}
                 >
-                    <div
-                        ref={ref => this.home = ref}
+                    <section
+                        ref={(ref) => (this.home = ref)}
                         className="fullscreen-container parallax-bg"
-                        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a20bc6324f6ef2969d9a7cae56b8d4d1&auto=format&fit=crop&w=1000&q=95")' }}
+                        style={{
+                            backgroundImage:
+                                'url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a20bc6324f6ef2969d9a7cae56b8d4d1&auto=format&fit=crop&w=1000&q=95")',
+                        }}
                     >
-                        <div style={styles.HomeSectionContentContainer} >
-                            <div style={{ height: '50%', marginTop: '0%', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                                <h1 style={styles.HomeSectionH1} >hey, I'm Nieky.</h1>
-                                <h3 style={styles.HomeSectionH3} >thanks for checking out my site</h3>
-                                <h2 style={styles.HomeSectionH2} >Software Engineer</h2>
+                        <div style={styles.homeSectionContentContainer}>
+                            <div style={styles.homeSectionContent}>
+                                <h1 style={styles.homeSectionH1}>hey, i'm Nieky.</h1>
+                                <h3 style={styles.homeSectionH3}>
+                                    thanks for checking out my site
+                                </h3>
+                                <h4 style={styles.homeSectionH2}>
+                                    i'm a full stack javascript engineer
+                                </h4>
                             </div>
                             <FiChevronDown
-                                onClick={() => window.scrollTo(0, window.innerHeight)}
+                                onClick={() => scrollToComponent(this.about)}
                                 size={55}
                                 color="white"
                             />
                         </div>
-                    </div>
+                    </section>
                 </VisibilitySensor>
                 <VisibilitySensor
                     {...sensorConfig}
-                    onChange={isVisible => this.updateActiveSection(isVisible, 'about')}
+                    onChange={(isVisible) => this.updateActiveSection(isVisible, 'about')}
                 >
-                    <div
-                        ref={ref => this.about = ref}
-                        id="about"
-                        className="fullscreen-container"
-                        style={{ backgroundColor: 'rgb(28, 109, 161)' }}
-                    >
-                        <h1 style={{ margin: 0 }} >more about me</h1>
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >Volt Compiler</h2>
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >RealMark</h2>
-                        </div>
-                    </div>
+                    {({ isVisible }) => (
+                        <section
+                            ref={(ref) => (this.about = ref)}
+                            id="about"
+                            style={styles.aboutSectionContainer}
+                        >
+                            <Transition
+                                items={isVisible || sectionsLoaded.includes('about')}
+                                from={{ opacity: 0 }}
+                                enter={{ opacity: 1 }}
+                                leavel={{ opacity: 0 }}
+                                config={{ duration: 750 }}
+                            >
+                                {(isVisible) =>
+                                    isVisible &&
+                                    (({ opacity }) => (
+                                        <div
+                                            style={{
+                                                opacity,
+                                                ...styles.aboutSectionContent
+                                            }}
+                                        >
+                                            <h1 style={styles.aboutSectionHeader} >
+                                                more about me
+                                            </h1>
+                                            <div
+                                                className="responsive-projects"
+                                                style={styles.aboutSectionBodyContainer}
+                                            >
+                                                <div style={styles.aboutSectionBioWrapper} >
+                                                    <div style={styles.aboutSectionInfoContainer} >
+                                                        <h3 style={styles.aboutSectionInfoLabel} >
+                                                            from
+                                                        </h3>
+                                                        <p style={styles.aboutSectionInfoValue} >
+                                                            kansas city, mo
+                                                        </p>
+                                                    </div>
+                                                    <div style={styles.aboutSectionInfoContainer} >
+                                                        <h3 style={styles.aboutSectionInfoLabel} >
+                                                            based in
+                                                        </h3>
+                                                        <p style={styles.aboutSectionInfoValue} >
+                                                            chicago, il
+                                                        </p>
+                                                    </div>
+                                                    <div style={styles.aboutSectionInfoContainer} >
+                                                        <h3 style={styles.aboutSectionInfoEduHeader} >
+                                                            education
+                                                        </h3>
+                                                        <div style={styles.aboutSectionInfoEduItem} >
+                                                            <p style={styles.aboutSectionInfoEduLabel} >
+                                                                <b>bachelor's</b>, loyola university chicago
+                                                            </p>
+                                                            <p style={styles.aboutSectionInfoEduValue} >
+                                                                software engineering
+                                                            </p>
+                                                            <p style={styles.aboutSectionInfoEduValue} >
+                                                                minors in computer crime & forensics and communications studies
+                                                            </p>
+                                                        </div>
+                                                        <div style={styles.aboutSectionInfoEduItem} >
+                                                            <p style={styles.aboutSectionInfoEduLabel} >
+                                                                <b>master's</b>, loyola university chicago
+                                                            </p>
+                                                            <p style={styles.aboutSectionInfoEduValue} >
+                                                                software engineering
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style={styles.aboutSectionRightWrapper} >
+                                                    <div style={styles.aboutSectionRightTextContainer} >
+                                                        <h4 style={styles.aboutSectionRightText} >
+                                                            i specialize in web and mobile application development
+                                                        </h4>
+                                                    </div>
+                                                    <div style={styles.aboutSectionRightIconsContainer} >
+                                                        <FaDesktop
+                                                            size={100}
+                                                            color="white"
+                                                        />
+                                                        <FaMobileAlt
+                                                            size={100}
+                                                            color="white"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </Transition>
+                        </section>
+                    )}
                 </VisibilitySensor>
+                <div style={styles.fullstackDivider} >
+                    <FaUser {...styles.fullstackIcons} />
+                    <div style={styles.fullstackConnection} ></div>
+                    <FaServer {...styles.fullstackIcons} />
+                </div>
                 <VisibilitySensor
                     {...sensorConfig}
-                    onChange={isVisible => this.updateActiveSection(isVisible, 'tech')}
+                    onChange={(isVisible) => this.updateActiveSection(isVisible, 'tech')}
                 >
-                    <div
-                        ref={ref => this.tech = ref}
+                    <section
+                        ref={(ref) => (this.tech = ref)}
                         id="technologies"
-                        className="fullscreen-container parallax-bg"
-                        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1473873446975-123c5143248b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=339ba470b071f6b0d7536e7b1619efca&auto=format&fit=crop&w=1400&q=95")' }}
+                        className="fullscreen-container"
+                        style={styles.techSectionContainer}
                     >
-                        <div style={{ height: '100%', width: '100%', backgroundColor: 'rgba(0.2, 0.3, 2, 0.5)' }} >
-                            <h1 style={{ margin: 0, padding: '25px', color: 'rgb(22, 175, 101)', textAlign: 'center' }} >technologies</h1>
-                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >AXLRY</h2>
-                            <IoLogoJavascript color="white" size={45} />
-                            <IoLogoNodejs color="white" size={45} />
-                            <h2 style={{ flex: 1, color: 'rgb(252, 154, 31)' }} >Bigger Than Basketball</h2>
+                        <div
+                            style={styles.techSectionContentContainer}
+                        >
+                            <h1 style={styles.techSectionHeader} >
+                                technologies
+                            </h1>
+                            <div
+                                className="responsive-tech"
+                                style={styles.iconRowContainer}
+                            >
+                                <div style={styles.iconContainer}>
+                                    <div style={styles.iconVisualsWrapper}>
+                                        <img
+                                            src="/static/img/language-javascript.png"
+                                            style={styles.icon}
+                                            // used to be 65x65 (wxh)
+                                        />
+                                        <CircleGraph
+                                            size="120px"
+                                            percentage={90}
+                                            barColor={colorPalette.orange}
+                                            animate
+                                        />
+                                    </div>
+                                    <p style={styles.iconLabel}>JavaScript (ES5+)</p>
+                                </div>
+                                <div style={styles.iconContainer}>
+                                    <div style={styles.iconVisualsWrapper} >
+                                        <img
+                                            src="/static/img/React-icon.png"
+                                            style={styles.icon}
+                                        />
+                                         <CircleGraph
+                                            size="120px"
+                                            percentage={80}
+                                            barColor={colorPalette.blue}
+                                            animate
+                                        />
+                                    </div>
+                                    <p style={styles.iconLabel}>React.js / React Native</p>
+                                </div>
+                                <div style={styles.iconContainer}>
+                                    <div style={styles.iconVisualsWrapper} >
+                                        <IoLogoNodejs
+                                            color="white"
+                                            size={65}
+                                            // used to be size 75
+                                        />
+                                        <CircleGraph
+                                            size="120px"
+                                            percentage={85}
+                                            barColor={colorPalette.green}
+                                            animate
+                                        />
+                                    </div>
+                                    <p style={styles.iconLabel}>Node.js</p>
+                                </div>
+                            </div>
+                            <div
+                                className="responsive-tech"
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'space-around',
+                                    alignItems: 'center',
+                                    marginBottom: '50px',
+                                }}
+                            >
+                                <div style={styles.barGraphColumnContainer} >
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >
+                                                HTML5
+                                            </p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >CSS3</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >GraphQL</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >UI Design</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style={styles.barGraphColumnContainer} >
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >Express</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >MongoDB</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >Firebase</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={styles.barGraphContainer} >
+                                        <div style={styles.barGraphLabelContainer} >
+                                            <p style={styles.barGraphLabel} >Heroku</p>
+                                        </div>
+                                        <div style={styles.barContainer} >
+                                            <div style={styles.bar}>
+                                            <p style={styles.barPrecentage} >90%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
+                </VisibilitySensor>
+                <VisibilitySensor
+                    {...sensorConfig}
+                    onChange={(isVisible) => this.updateActiveSection(isVisible, 'projects')}
+                >
+                    {({ isVisible }) => (
+                        <section
+                            ref={(ref) => (this.projects = ref)}
+                            id="projects"
+                            style={styles.projectsContainer}
+                        >
+                            <Transition
+                                items={isVisible || sectionsLoaded.includes('projects')}
+                                from={{ opacity: 0 }}
+                                enter={{ opacity: 1 }}
+                                leavel={{ opacity: 0 }}
+                                config={{ duration: 750 }}
+                            >
+                                {(isVisible) =>
+                                    isVisible &&
+                                    (({ opacity }) => (
+                                        <div
+                                            style={{
+                                                opacity,
+                                                ...styles.projectsContentContainer
+                                            }}
+                                        >
+                                            <h1 style={styles.projectsHeader} >
+                                                projects
+                                            </h1>
+                                            <div
+                                                className="responsive-projects"
+                                                style={styles.projectsSections}
+                                            >
+                                                <div style={styles.projectsClosedSection} >
+                                                    <h2 className="code" style={styles.projectsSectionHeader} >
+                                                        ~/closed_source
+                                                        <span style={styles.projectsSectionHeaderArrow} >
+                                                            >
+                                                        </span>
+                                                    </h2>
+
+                                                    <div style={styles.closedProjectContainer} >
+                                                        <a href="https://www.axlry.com" >
+                                                            <img
+                                                                src="/static/img/axlry-logo.png"
+                                                                style={styles.axlryLogo}
+                                                            />
+                                                        </a>
+                                                        <p style={styles.closedProjectRole} >
+                                                            cofounder<br/>
+                                                            head of technological development
+                                                        </p>
+                                                        <p style={styles.closedProjectDesc} >
+                                                            cross-platform mobile app to connect artists, managers, and labels with music video directors
+                                                        </p>
+                                                    </div>
+
+                                                    <div style={styles.closedProjectContainer} >
+                                                        <a
+                                                            href="https://www.biggerthanbasketball.org"
+                                                            style={styles.btbBackground}
+                                                        >
+                                                            <img
+                                                                src="https://res.cloudinary.com/bigger-than-basketball/image/upload/fl_progressive/Bigger_Than_Basketball_LOGO_high_res.png"
+                                                                style={styles.btbLogo}
+                                                            />
+                                                        </a>
+                                                        <p style={styles.closedProjectRole} >
+                                                            freelance web engineer
+                                                        </p>
+                                                        <p style={styles.closedProjectDesc} >
+                                                            non-profit organization raising awareness and funding for research in Crohn's disease
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div style={styles.projectsOpenSection} >
+                                                    <h2 className="code" style={styles.projectsSectionHeader} >
+                                                        ~/open_source
+                                                        <span style={styles.projectsSectionHeaderArrow} >
+                                                            >
+                                                        </span>
+                                                    </h2>
+                                                    <div style={styles.openProjectsList} >
+                                                        <div style={styles.openProjectContainer} >
+                                                            <h3 className="code" style={styles.openProjectTitle} >
+                                                                RealMark
+                                                            </h3>
+                                                            <p style={styles.openProjectDesc} >
+                                                                cross-platform mobile app for collaborative markdown note-taking
+                                                            </p>
+                                                        </div>
+                                                        <div style={styles.openProjectContainer} >
+                                                            <h3 className="code" style={styles.openProjectTitle} >
+                                                                volt-compiler
+                                                            </h3>
+                                                            <FaGithub
+                                                                color="white"
+                                                                size={20}
+                                                                style={styles.githubIcon}
+                                                            />
+                                                            <p style={styles.openProjectDesc} >
+                                                                compiler for an alternative syntax for bootstrapping Firebase Security Rules
+                                                            </p>
+                                                        </div>
+                                                        <div style={styles.openProjectContainer} >
+                                                            <h3 className="code" style={styles.openProjectTitle} >
+                                                                react-scroll-indicator
+                                                            </h3>
+                                                            <FaGithub
+                                                                color="white"
+                                                                size={20}
+                                                                style={styles.githubIcon}
+                                                            />
+                                                            <p style={styles.openProjectDesc} >
+                                                                simple React component from a scrolling progress bar
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </Transition>
+                        </section>
+                    )}
                 </VisibilitySensor>
             </ScrollIndicatorPage>
-        )
+        );
     }
 }
