@@ -5,7 +5,7 @@ import './index.css';
 // based off:
 // https://medium.com/@pppped/how-to-code-a-responsive-circular-percentage-chart-with-svg-and-css-3632f8cd7705
 const CircleGraph = ({ size, percentage, barColor, animate }) => (
-    <div style={{ height: size, width: size }}>
+    <div style={{ minHeight: size, minWidth: size }}>
         <svg viewBox="0 0 36 36">
             <path
                 fill="none"
