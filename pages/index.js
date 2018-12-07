@@ -161,10 +161,6 @@ export default class Home extends React.Component {
                     <section
                         ref={(ref) => (this.home = ref)}
                         className="fullscreen-container parallax-bg"
-                        style={{
-                            backgroundImage:
-                                'url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a20bc6324f6ef2969d9a7cae56b8d4d1&auto=format&fit=crop&w=1000&q=95")',
-                        }}
                     >
                         <div style={styles.homeSectionContentContainer}>
                             <div style={styles.homeSectionContent}>
