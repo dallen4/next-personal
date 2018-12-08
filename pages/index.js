@@ -537,6 +537,21 @@ export default class Home extends React.Component {
                                                     </h2>
                                                     <div style={styles.openProjectsList} >
                                                         <div style={styles.openProjectContainer} >
+                                                            <a href="https://github.com/dallen4/next-boilerplate" >
+                                                                <h3 className="code" style={styles.openProjectTitle} >
+                                                                    next-boilerplate
+                                                                </h3>
+                                                                <FaGithub
+                                                                    color="white"
+                                                                    size={20}
+                                                                    style={styles.githubIcon}
+                                                                />
+                                                            </a>
+                                                            <p style={styles.openProjectDesc} >
+                                                                simple boilerplate for Next.js + ExpressJS apps
+                                                            </p>
+                                                        </div>
+                                                        <div style={styles.openProjectContainer} >
                                                             <h3 className="code" style={styles.openProjectTitle} >
                                                                 RealMark
                                                             </h3>
@@ -545,27 +560,31 @@ export default class Home extends React.Component {
                                                             </p>
                                                         </div>
                                                         <div style={styles.openProjectContainer} >
-                                                            <h3 className="code" style={styles.openProjectTitle} >
-                                                                volt-compiler
-                                                            </h3>
-                                                            <FaGithub
-                                                                color="white"
-                                                                size={20}
-                                                                style={styles.githubIcon}
-                                                            />
+                                                            <a href="https://github.com/dallen4/volt-compiler" >
+                                                                <h3 className="code" style={styles.openProjectTitle} >
+                                                                    volt-compiler
+                                                                </h3>
+                                                                <FaGithub
+                                                                    color="white"
+                                                                    size={20}
+                                                                    style={styles.githubIcon}
+                                                                />
+                                                            </a>
                                                             <p style={styles.openProjectDesc} >
                                                                 compiler for an alternative syntax for bootstrapping Firebase Security Rules
                                                             </p>
                                                         </div>
                                                         <div style={styles.openProjectContainer} >
-                                                            <h3 className="code" style={styles.openProjectTitle} >
-                                                                react-scroll-indicator
-                                                            </h3>
-                                                            <FaGithub
-                                                                color="white"
-                                                                size={20}
-                                                                style={styles.githubIcon}
-                                                            />
+                                                            <a href="https://github.com/dallen4/react-scroll-indicator" >
+                                                                <h3 className="code" style={styles.openProjectTitle} >
+                                                                    react-scroll-indicator
+                                                                </h3>
+                                                                <FaGithub
+                                                                    color="white"
+                                                                    size={20}
+                                                                    style={styles.githubIcon}
+                                                                />
+                                                            </a>
                                                             <p style={styles.openProjectDesc} >
                                                                 simple React component from a scrolling progress bar
                                                             </p>
