@@ -330,20 +330,17 @@ const styles = {
         padding: '8px',
     },
     closedProjectRole: {
+        alignSelf: 'flex-start',
         margin: 0,
         color: 'white',
         fontSize: '0.9rem',
         fontStyle: 'italic',
-        textAlign: 'center',
     },
     closedProjectDesc: {
         margin: 0,
-        paddingLeft: '10%',
-        paddingRight: '10%',
         paddingTop: '6px',
         color: 'white',
         fontSize: '0.9rem',
-        textAlign: 'center',
     },
     projectsOpenSection: {
         width: '100%',
