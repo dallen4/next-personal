@@ -1,7 +1,8 @@
-// import app & server modules
+// import api, app, & server modules
 const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
+const { graphqlApi } = require('./api');
 
 // import express middlewares
 const cors = require('cors');
@@ -34,6 +35,12 @@ app.prepare().then(() => {
     // configure req logging
     let logMode = dev ? 'dev' : 'combined';
     server.use(morgan(logMode));
+
+    // mount graphql endpoint
+    graphqlApi.applyMiddleware({
+        app: server,
+        path: '/api',
+    });
 
     if (!dev)
         server.get('/', (req, res) => {
