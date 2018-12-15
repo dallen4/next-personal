@@ -176,6 +176,7 @@ const styles = {
         color: 'rgb(211,211,211)',
     },
     techSectionContainer: {
+        minHeight: '100vh',
         height: 'auto',
         backgroundColor: colorPalette.gray,
     },

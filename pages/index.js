@@ -194,7 +194,7 @@ export default class Home extends React.Component {
                                 items={isVisible || sectionsLoaded.includes('about')}
                                 from={{ opacity: 0 }}
                                 enter={{ opacity: 1 }}
-                                leavel={{ opacity: 0 }}
+                                leave={{ opacity: 0 }}
                                 config={{ duration: 750 }}
                             >
                                 {(isVisible) =>
@@ -289,169 +289,186 @@ export default class Home extends React.Component {
                     {...sensorConfig}
                     onChange={(isVisible) => this.updateActiveSection(isVisible, 'tech')}
                 >
-                    <section
-                        ref={(ref) => (this.tech = ref)}
-                        id="technologies"
-                        className="fullscreen-container"
-                        style={styles.techSectionContainer}
-                    >
-                        <div
-                            style={styles.techSectionContentContainer}
+                    {({ isVisible }) => (
+                        <section
+                            ref={(ref) => (this.tech = ref)}
+                            id="technologies"
+                            style={styles.techSectionContainer}
                         >
-                            <h1 style={styles.techSectionHeader} >
-                                technologies
-                            </h1>
-                            <div
-                                className="responsive-tech"
-                                style={styles.iconRowContainer}
+                            <Transition
+                                items={isVisible || sectionsLoaded.includes('tech')}
+                                from={{ opacity: 0 }}
+                                enter={{ opacity: 1 }}
+                                leave={{ opacity: 0 }}
+                                config={{ duration: 750 }}
                             >
-                                <div style={styles.iconContainer}>
-                                    <div style={styles.iconVisualsWrapper}>
-                                        <img
-                                            src="/static/img/language-javascript.png"
-                                            style={styles.icon}
-                                            // used to be 65x65 (wxh)
-                                        />
-                                        <CircleGraph
-                                            size="120px"
-                                            percentage={90}
-                                            barColor={colorPalette.orange}
-                                            animate
-                                        />
-                                    </div>
-                                    <p style={styles.iconLabel}>JavaScript (ES5+)</p>
-                                </div>
-                                <div style={styles.iconContainer}>
-                                    <div style={styles.iconVisualsWrapper} >
-                                        <img
-                                            src="/static/img/React-icon.png"
-                                            style={styles.icon}
-                                        />
-                                         <CircleGraph
-                                            size="120px"
-                                            percentage={80}
-                                            barColor={colorPalette.blue}
-                                            animate
-                                        />
-                                    </div>
-                                    <p style={styles.iconLabel}>React.js / React Native</p>
-                                </div>
-                                <div style={styles.iconContainer}>
-                                    <div style={styles.iconVisualsWrapper} >
-                                        <IoLogoNodejs
-                                            color="white"
-                                            size={65}
-                                            // used to be size 75
-                                        />
-                                        <CircleGraph
-                                            size="120px"
-                                            percentage={85}
-                                            barColor={colorPalette.green}
-                                            animate
-                                        />
-                                    </div>
-                                    <p style={styles.iconLabel}>Node.js</p>
-                                </div>
-                            </div>
-                            <div
-                                className="responsive-tech"
-                                style={{
-                                    flex: 1,
-                                    justifyContent: 'space-around',
-                                    alignItems: 'center',
-                                    marginBottom: '50px',
-                                }}
-                            >
-                                <div style={styles.barGraphColumnContainer} >
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >
-                                                HTML5
-                                            </p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
+                                {(isVisible) =>
+                                    isVisible &&
+                                    (({ opacity }) => (
+                                        <div
+                                            style={{
+                                                opacity,
+                                                ...styles.techSectionContentContainer
+                                            }}
+                                        >
+                                            <h1 style={styles.techSectionHeader} >
+                                                technologies
+                                            </h1>
+                                            <div
+                                                className="responsive-tech"
+                                                style={styles.iconRowContainer}
+                                            >
+                                                <div style={styles.iconContainer}>
+                                                    <div style={styles.iconVisualsWrapper}>
+                                                        <img
+                                                            src="/static/img/language-javascript.png"
+                                                            style={styles.icon}
+                                                            // used to be 65x65 (wxh)
+                                                        />
+                                                        <CircleGraph
+                                                            size="120px"
+                                                            percentage={90}
+                                                            barColor={colorPalette.orange}
+                                                            animate
+                                                        />
+                                                    </div>
+                                                    <p style={styles.iconLabel}>JavaScript (ES5+)</p>
+                                                </div>
+                                                <div style={styles.iconContainer}>
+                                                    <div style={styles.iconVisualsWrapper} >
+                                                        <img
+                                                            src="/static/img/React-icon.png"
+                                                            style={styles.icon}
+                                                        />
+                                                        <CircleGraph
+                                                            size="120px"
+                                                            percentage={80}
+                                                            barColor={colorPalette.blue}
+                                                            animate
+                                                        />
+                                                    </div>
+                                                    <p style={styles.iconLabel}>React.js / React Native</p>
+                                                </div>
+                                                <div style={styles.iconContainer}>
+                                                    <div style={styles.iconVisualsWrapper} >
+                                                        <IoLogoNodejs
+                                                            color="white"
+                                                            size={65}
+                                                            // used to be size 75
+                                                        />
+                                                        <CircleGraph
+                                                            size="120px"
+                                                            percentage={85}
+                                                            barColor={colorPalette.green}
+                                                            animate
+                                                        />
+                                                    </div>
+                                                    <p style={styles.iconLabel}>Node.js</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >CSS3</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >GraphQL</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >UI Design</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div
+                                                className="responsive-tech"
+                                                style={{
+                                                    flex: 1,
+                                                    justifyContent: 'space-around',
+                                                    alignItems: 'center',
+                                                    marginBottom: '50px',
+                                                }}
+                                            >
+                                                <div style={styles.barGraphColumnContainer} >
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >
+                                                                HTML5
+                                                            </p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >CSS3</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >GraphQL</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >UI Design</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                <div style={styles.barGraphColumnContainer} >
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >Express</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
+                                                <div style={styles.barGraphColumnContainer} >
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >Express</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >MongoDB</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >Firebase</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style={styles.barGraphContainer} >
+                                                        <div style={styles.barGraphLabelContainer} >
+                                                            <p style={styles.barGraphLabel} >Heroku</p>
+                                                        </div>
+                                                        <div style={styles.barContainer} >
+                                                            <div style={styles.bar}>
+                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >MongoDB</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >Firebase</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={styles.barGraphContainer} >
-                                        <div style={styles.barGraphLabelContainer} >
-                                            <p style={styles.barGraphLabel} >Heroku</p>
-                                        </div>
-                                        <div style={styles.barContainer} >
-                                            <div style={styles.bar}>
-                                            <p style={styles.barPrecentage} >90%</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                                    ))
+                                }
+                            </Transition>
+                        </section>
+                    )}
                 </VisibilitySensor>
                 <VisibilitySensor
                     {...sensorConfig}
@@ -467,7 +484,7 @@ export default class Home extends React.Component {
                                 items={isVisible || sectionsLoaded.includes('projects')}
                                 from={{ opacity: 0 }}
                                 enter={{ opacity: 1 }}
-                                leavel={{ opacity: 0 }}
+                                leave={{ opacity: 0 }}
                                 config={{ duration: 750 }}
                             >
                                 {(isVisible) =>
