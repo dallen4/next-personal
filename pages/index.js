@@ -554,7 +554,10 @@ export default class Home extends React.Component {
                                                     </h2>
                                                     <div style={styles.openProjectsList} >
                                                         <div style={styles.openProjectContainer} >
-                                                            <a href="https://github.com/dallen4/next-boilerplate" >
+                                                            <a 
+                                                                style={{ textDecoration: 'none' }}
+                                                                href="https://github.com/dallen4/next-boilerplate"
+                                                            >
                                                                 <h3 className="code" style={styles.openProjectTitle} >
                                                                     next-boilerplate
                                                                 </h3>
@@ -577,7 +580,10 @@ export default class Home extends React.Component {
                                                             </p>
                                                         </div>
                                                         <div style={styles.openProjectContainer} >
-                                                            <a href="https://github.com/dallen4/volt-compiler" >
+                                                            <a 
+                                                                style={{ textDecoration: 'none' }}
+                                                                href="https://github.com/dallen4/volt-compiler"
+                                                            >
                                                                 <h3 className="code" style={styles.openProjectTitle} >
                                                                     volt-compiler
                                                                 </h3>
@@ -592,7 +598,10 @@ export default class Home extends React.Component {
                                                             </p>
                                                         </div>
                                                         <div style={styles.openProjectContainer} >
-                                                            <a href="https://github.com/dallen4/react-scroll-indicator" >
+                                                            <a 
+                                                                style={{ textDecoration: 'none' }}
+                                                                href="https://github.com/dallen4/react-scroll-indicator"
+                                                            >
                                                                 <h3 className="code" style={styles.openProjectTitle} >
                                                                     react-scroll-indicator
                                                                 </h3>
