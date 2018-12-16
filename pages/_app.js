@@ -1,5 +1,6 @@
 import App, { Container } from 'next/app';
 import React from 'react';
+import '../styles/base.css';
 
 class MyApp extends App {
     render() {
