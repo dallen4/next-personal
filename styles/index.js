@@ -118,6 +118,13 @@ const styles = {
         padding: 0,
         color: colorPalette.white,
     },
+    degreeLabel: {
+        paddingRight: '2px'
+    },
+    degreeYear: {
+        fontSize: '0.9rem',
+        paddingLeft: '2px'
+    },
     aboutSectionInfoEduValue: {
         margin: 0,
         padding: 0,
@@ -233,7 +240,7 @@ const styles = {
         width: '100%',
         height: '20px',
         marginBottom: '18px',
-        backgroundColor: 'rgba(150,150,150,0.5)',
+        backgroundColor: 'rgba(180,180,180,0.6)',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -257,7 +264,6 @@ const styles = {
     },
     bar: {
         height: '100%',
-        width: '90%',
         backgroundColor: colorPalette.blue,
     },
     barPrecentage: {
@@ -278,7 +284,6 @@ const styles = {
         width: '90%',
         marginLeft: '5%',
         marginRight: '5%',
-        marginBottom: '70px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',

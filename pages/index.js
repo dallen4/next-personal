@@ -13,10 +13,10 @@ import {
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { IoLogoNodejs } from 'react-icons/io';
-import '../styles/base.css';
 import '../styles/index.css';
 import { styles } from '../styles';
 import { colorPalette } from '../config/color';
+import Footer from '../components/Footer';
 
 // init with default values to compensate for SSR
 let scrollToComponent = () => {};
@@ -239,7 +239,14 @@ export default class Home extends React.Component {
                                                         </h3>
                                                         <div style={styles.aboutSectionInfoEduItem} >
                                                             <p style={styles.aboutSectionInfoEduLabel} >
-                                                                <b>bachelor's</b>, loyola university chicago
+                                                                <b style={styles.degreeLabel} >bachelor's</b>
+                                                                {' '}loyola university chicago{' '}
+                                                                <span
+                                                                    className="code"
+                                                                    style={styles.degreeYear}
+                                                                >
+                                                                    2017
+                                                                </span>
                                                             </p>
                                                             <p style={styles.aboutSectionInfoEduValue} >
                                                                 software engineering
@@ -250,7 +257,14 @@ export default class Home extends React.Component {
                                                         </div>
                                                         <div style={styles.aboutSectionInfoEduItem} >
                                                             <p style={styles.aboutSectionInfoEduLabel} >
-                                                                <b>master's</b>, loyola university chicago
+                                                            <b style={styles.degreeLabel} >master's</b>
+                                                                {' '}loyola university chicago{' '}
+                                                                <span
+                                                                    className="code"
+                                                                    style={styles.degreeYear}
+                                                                >
+                                                                    2018
+                                                                </span>
                                                             </p>
                                                             <p style={styles.aboutSectionInfoEduValue} >
                                                                 software engineering
@@ -345,7 +359,7 @@ export default class Home extends React.Component {
                                                         />
                                                         <CircleGraph
                                                             size="120px"
-                                                            percentage={80}
+                                                            percentage={85}
                                                             barColor={colorPalette.blue}
                                                             animate
                                                         />
@@ -386,8 +400,11 @@ export default class Home extends React.Component {
                                                             </p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '75%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >75%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -396,8 +413,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >CSS3</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '70%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >70%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -406,8 +426,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >GraphQL</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '65%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >65%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -416,8 +439,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >UI Design</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '65%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >65%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -429,8 +455,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >Express</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '80%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >80%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -439,8 +468,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >MongoDB</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '75%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >75%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -449,8 +481,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >Firebase</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '80%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >80%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -459,8 +494,11 @@ export default class Home extends React.Component {
                                                             <p style={styles.barGraphLabel} >Heroku</p>
                                                         </div>
                                                         <div style={styles.barContainer} >
-                                                            <div style={styles.bar}>
-                                                            <p style={styles.barPrecentage} >90%</p>
+                                                            <div style={{
+                                                                    width: '75%',
+                                                                    ...styles.bar
+                                                                }}>
+                                                            <p style={styles.barPrecentage} >75%</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -628,6 +666,7 @@ export default class Home extends React.Component {
                         </section>
                     )}
                 </VisibilitySensor>
+                <Footer/>
             </ScrollIndicatorPage>
         );
     }
