@@ -162,7 +162,10 @@ export default class Home extends React.Component {
                         ref={(ref) => (this.home = ref)}
                         className="fullscreen-container parallax-bg"
                     >
-                        <div style={styles.homeSectionContentContainer}>
+                        <div
+                            className="home-section-content-container"
+                            style={styles.homeSectionContentContainer}
+                        >
                             <div style={styles.homeSectionContent}>
                                 <h1 style={styles.homeSectionH1}>hey, i'm Nieky.</h1>
                                 <h3 style={styles.homeSectionH3}>

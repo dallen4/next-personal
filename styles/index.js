@@ -32,7 +32,6 @@ const styles = {
     homeSectionContentContainer: {
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgba(0.2, 0.3, 2, 0.7)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
