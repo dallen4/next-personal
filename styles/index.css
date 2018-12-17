@@ -8,6 +8,21 @@
     color: rgb(28, 109, 161);
 }
 
+@media only screen and (min-width: 651px) {
+    .bar-graph-container {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .bar-graph-container {
+        width: 90vw;
+        margin: 0;
+    }
+}
+
 @media only screen and (min-width: 801px) {
     .parallax-bg {
         background-attachment: fixed;
