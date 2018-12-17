@@ -32,7 +32,6 @@ const styles = {
     homeSectionContentContainer: {
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgba(0.2, 0.3, 2, 0.7)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
@@ -119,6 +118,13 @@ const styles = {
         padding: 0,
         color: colorPalette.white,
     },
+    degreeLabel: {
+        paddingRight: '2px'
+    },
+    degreeYear: {
+        fontSize: '0.9rem',
+        paddingLeft: '2px'
+    },
     aboutSectionInfoEduValue: {
         margin: 0,
         padding: 0,
@@ -176,6 +182,7 @@ const styles = {
         color: 'rgb(211,211,211)',
     },
     techSectionContainer: {
+        minHeight: '100vh',
         height: 'auto',
         backgroundColor: colorPalette.gray,
     },
@@ -220,10 +227,7 @@ const styles = {
         color: colorPalette.white,
     },
     barGraphColumnContainer: {
-        width: '90%',
         flex: 1,
-        marginLeft: '5%',
-        marginRight: '5%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -233,7 +237,7 @@ const styles = {
         width: '100%',
         height: '20px',
         marginBottom: '18px',
-        backgroundColor: 'rgba(150,150,150,0.5)',
+        backgroundColor: 'rgba(180,180,180,0.6)',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -241,14 +245,15 @@ const styles = {
     },
     barGraphLabelContainer: {
         height: '20px',
-        width: '20%',
+        minWidth: '20%',
+        width: 'auto',
         padding: '1px',
     },
     barGraphLabel: {
         display: 'inline',
         color: colorPalette.white,
         fontSize: '0.9rem',
-        width: '100%',
+        width: 'auto',
     },
     barContainer: {
         height: '16px',
@@ -257,7 +262,6 @@ const styles = {
     },
     bar: {
         height: '100%',
-        width: '90%',
         backgroundColor: colorPalette.blue,
     },
     barPrecentage: {
@@ -278,7 +282,6 @@ const styles = {
         width: '90%',
         marginLeft: '5%',
         marginRight: '5%',
-        marginBottom: '70px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -330,20 +333,17 @@ const styles = {
         padding: '8px',
     },
     closedProjectRole: {
+        alignSelf: 'flex-start',
         margin: 0,
         color: 'white',
         fontSize: '0.9rem',
         fontStyle: 'italic',
-        textAlign: 'center',
     },
     closedProjectDesc: {
         margin: 0,
-        paddingLeft: '10%',
-        paddingRight: '10%',
         paddingTop: '6px',
         color: 'white',
         fontSize: '0.9rem',
-        textAlign: 'center',
     },
     projectsOpenSection: {
         width: '100%',
