@@ -1,33 +1,51 @@
 import React from 'react';
-import { FiGithub, FiInstagram, FiTwitter } from 'react-icons/fi';
+import {
+    FiGithub,
+    FiInstagram,
+    FiTwitter,
+    FiMail
+} from 'react-icons/fi';
 import { FaSoundcloud } from 'react-icons/fa';
+import { styles } from './styles';
 
 export default () => (
-    <footer style={{ height: '90px', paddingLeft: '20px', paddingRight: '20px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }} >
-                <p className="code" style={{ margin: 0, padding: 0, color: 'white' }} >copyright &copy; dominique allen 2018.</p>
+    <footer style={styles.footer} >
+        <div style={styles.linkContainer} >
+            <a
+                href="mailto:nieky.allen@gmail.com"
+                style={styles.link}
+            >
+                <FiMail {...styles.icon} />
+            </a>
+            <a
+                href="https://github.com/dallen4"
+                style={styles.link}
+            >
+                <FiGithub {...styles.icon} />
+            </a>
+            <a
+                href="https://soundcloud.com/niekya"
+                style={styles.link}
+            >
+                <FaSoundcloud {...styles.icon} />
+            </a>
+            <a
+                href="https://instagram.com/nieky.m4a"
+                style={styles.link}
+            >
+                <FiInstagram {...styles.icon} />
+            </a>
+            <a
+                href="https://twitter.com/nieky_allen"
+                style={styles.link}
+            >
+                <FiTwitter {...styles.icon} />
+            </a>
         </div>
-        <div style={{ paddingLeft: '20%', paddingRight: '10%', flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
-            <FiGithub
-                color="white"
-                size={21}
-                style={{ display: 'inline' }}
-            />
-            <FaSoundcloud
-                color="white"
-                size={21}
-                style={{ display: 'inline' }}
-            />
-            <FiInstagram
-                color="white"
-                size={21}
-                style={{ display: 'inline' }}
-            />
-            <FiTwitter
-                color="white"
-                size={21}
-                style={{ display: 'inline' }}
-            />
+        <div style={styles.copyrightContainer} >
+            <p className="code" style={styles.copyright} >
+                copyright &copy; dominique allen 2018.
+            </p>
         </div>
     </footer>
 );
