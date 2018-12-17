@@ -227,10 +227,7 @@ const styles = {
         color: colorPalette.white,
     },
     barGraphColumnContainer: {
-        width: '90%',
         flex: 1,
-        marginLeft: '5%',
-        marginRight: '5%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -248,14 +245,15 @@ const styles = {
     },
     barGraphLabelContainer: {
         height: '20px',
-        width: '20%',
+        minWidth: '20%',
+        width: 'auto',
         padding: '1px',
     },
     barGraphLabel: {
         display: 'inline',
         color: colorPalette.white,
         fontSize: '0.9rem',
-        width: '100%',
+        width: 'auto',
     },
     barContainer: {
         height: '16px',
