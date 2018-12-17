@@ -392,7 +392,10 @@ export default class Home extends React.Component {
                                                     marginBottom: '50px',
                                                 }}
                                             >
-                                                <div style={styles.barGraphColumnContainer} >
+                                                <div
+                                                    className="bar-graph-container"
+                                                    style={styles.barGraphColumnContainer}
+                                                >
                                                     <div style={styles.barGraphContainer} >
                                                         <div style={styles.barGraphLabelContainer} >
                                                             <p style={styles.barGraphLabel} >
@@ -449,7 +452,10 @@ export default class Home extends React.Component {
                                                     </div>
                                                 </div>
 
-                                                <div style={styles.barGraphColumnContainer} >
+                                                <div
+                                                    className="bar-graph-container"
+                                                    style={styles.barGraphColumnContainer}
+                                                >
                                                     <div style={styles.barGraphContainer} >
                                                         <div style={styles.barGraphLabelContainer} >
                                                             <p style={styles.barGraphLabel} >Express</p>
