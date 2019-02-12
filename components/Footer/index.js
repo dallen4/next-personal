@@ -44,7 +44,7 @@ export default () => (
         </div>
         <div style={styles.copyrightContainer} >
             <p className="code" style={styles.copyright} >
-                copyright &copy; dominique allen 2018.
+                copyright &copy; dominique allen 2019.
             </p>
         </div>
     </footer>
