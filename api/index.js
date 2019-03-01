@@ -10,7 +10,7 @@ const resolvers = require('./resolvers');
 // create graphql schema
 const schema = makeExecutableSchema({
     typeDefs,
-    resolvers
+    resolvers,
 });
 
 // init graphql handler
@@ -21,13 +21,16 @@ const graphqlApi = new ApolloServer({
         endpoint: '/api',
         settings: {
             'editor.theme': 'dark',
-          },
-          tabs: [
+        },
+        tabs: [
             {
-              endpoint: '/api',
+                endpoint: '/api',
             },
-          ],
-    }, 
+        ],
+    },
+    subscriptions: {
+        onConnect: () => console.log('connected...'),
+    },
 });
 
 module.exports = { graphqlApi };
