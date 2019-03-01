@@ -145,6 +145,11 @@ export default class Home extends React.Component {
         return (
             <ScrollIndicatorPage>
                 {this.renderMeta()}
+                <style global jsx>{`
+                    body {
+                        background: rgb(51, 54, 57);
+                    }
+                `}</style>
                 {this.renderNavLinks()}
                 <div style={backToTopButtonStyles}>
                     <FiChevronUp
