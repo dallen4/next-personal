@@ -1,8 +1,10 @@
 // import api, app, & server modules
 const express = require('express');
+const { createServer } = require('http');
 const next = require('next');
 const LRUCache = require('lru-cache');
 const { graphqlApi } = require('./api');
+require('dotenv').config();
 
 // import express middlewares
 const cors = require('cors');
@@ -10,7 +12,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 const dev = process.env.NODE_ENV !== 'production';
 
 // init next app
@@ -26,6 +28,7 @@ const ssrCache = new LRUCache({
 app.prepare().then(() => {
 
     const server = express();
+    const mongoose = require('./api/dbms');
 
     // mount express middleware
     server.use(cors());
@@ -51,9 +54,12 @@ app.prepare().then(() => {
         return handler(req, res);
     });
 
-    server.listen(PORT, (err) => {
+    const httpServer = createServer(server);
+    graphqlApi.installSubscriptionHandlers(httpServer);
+
+    httpServer.listen(PORT, (err) => {
         if (err) throw err;
-        console.log(`server started on port ${PORT}...`);
+        console.log(`server started on port ${PORT}...\nAPI at ${graphqlApi.graphqlPath} and Subscriptions at ${graphqlApi.subscriptionsPath}`);
     });
 
 }).catch(error => console.error(error));
@@ -65,7 +71,6 @@ async function renderWithCache(req, res, pagePath, queryParams) {
     // if page is cached, send from cache
     if (ssrCache.has(key)) {
         res.setHeader('x-cache', 'HIT');
-        console.log('sending from cache');
         res.send(ssrCache.get(key));
         return;
     }
