@@ -1,4 +1,21 @@
+ # import User from 'schemas/user.graphql'
+# import Post from 'schemas/post.graphql'
 
 type Query {
     info: [String!]!
+    listPosts: [Post]!
+    post(id: ID, slug: String): Post!
+}
+
+type Mutation {
+    signup(username: String!, email: String!, password: String!, inviteToken: String!): AuthPayload
+    login(email: String, username: String, password: String!): AuthPayload
+    newPost(title: String!, author: String!, categories: [String]!, description: String, body: String!): Post!
+    updatePost(id: ID!, title: String, author: String, categories: [String], description: String, body: String): Post!
+    sendInvite(email: String!): Invitation!
+}
+
+type AuthPayload {
+    token: String
+    user: User
 }

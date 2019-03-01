@@ -1,0 +1,11 @@
+type User {
+    id: ID!
+    username: String!
+    email: String!
+}
+
+type Invitation {
+    id: ID!
+    token: String!
+    email: String!
+}

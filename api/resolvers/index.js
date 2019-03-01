@@ -1,6 +1,9 @@
+// resolvers/index.js
+
+const Query = require('./query');
+const Mutation = require('./mutation');
 
 module.exports = {
-    Query: {
-        info: () => ['hello', 'goodbye'],
-    },
+    Query,
+    Mutation
 };
