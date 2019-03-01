@@ -9,7 +9,6 @@ body {
     height: 100%;
     width: 100%;
     font-family: 'Montserrat', 'Open Sans', monospace;
-    background-color: rgb(51, 54, 57);
 }
 
 .code {
@@ -19,6 +18,11 @@ body {
 .fullscreen-container {
     height: 100vh;
     width: 100%;
+}
+
+button {
+    border: none;
+    outline: none;
 }
 
 .button:hover {
