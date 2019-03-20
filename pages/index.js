@@ -15,8 +15,8 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { IoLogoNodejs } from 'react-icons/io';
 import '../styles/index.css';
 import { styles } from '../styles';
-import { colorPalette } from '../config/color';
 import Footer from '../components/Footer';
+import { homePalette } from '../styles/colors';
 
 // init with default values to compensate for SSR
 let scrollToComponent = () => {};
@@ -350,7 +350,7 @@ export default class Home extends React.Component {
                                                         <CircleGraph
                                                             size="120px"
                                                             percentage={90}
-                                                            barColor={colorPalette.orange}
+                                                            barColor={homePalette.orange}
                                                             animate
                                                         />
                                                     </div>
@@ -365,7 +365,7 @@ export default class Home extends React.Component {
                                                         <CircleGraph
                                                             size="120px"
                                                             percentage={85}
-                                                            barColor={colorPalette.blue}
+                                                            barColor={homePalette.blue}
                                                             animate
                                                         />
                                                     </div>
@@ -381,7 +381,7 @@ export default class Home extends React.Component {
                                                         <CircleGraph
                                                             size="120px"
                                                             percentage={85}
-                                                            barColor={colorPalette.green}
+                                                            barColor={homePalette.green}
                                                             animate
                                                         />
                                                     </div>
