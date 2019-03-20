@@ -8,7 +8,7 @@ import {
     convertFromHTML,
 } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import { colorPalette } from '../../styles/colors';
+import { writePalette } from '../../styles/colors';
 import { styles } from './styles';
 
 export default class TextEditor extends Component {
@@ -78,7 +78,7 @@ export default class TextEditor extends Component {
 
         const toolbarStyle = {
             display: 'block',
-            backgroundColor: colorPalette.blue,
+            backgroundColor: writePalette.blue,
             color: 'white',
             padding: 10,
             borderTopLeftRadius: '5px',
@@ -96,7 +96,7 @@ export default class TextEditor extends Component {
                 </div>
                 <div
                     style={{
-                        backgroundColor: colorPalette.white,
+                        backgroundColor: writePalette.white,
                         padding: '10px',
                         borderBottomLeftRadius: '5px',
                         borderBottomRightRadius: '5px',

@@ -1,6 +1,6 @@
 // TextEditor component
 import React, { Component } from 'react';
-import { colorPalette } from '../styles/colors';
+import { writePalette } from '../styles/colors';
 
 export default class TextEditor extends Component {
 
@@ -8,8 +8,8 @@ export default class TextEditor extends Component {
 
     static defaultProps = {
         label: 'input',
-        inputColor: colorPalette.white,
-        activeInputColor: colorPalette.lightBlue,
+        inputColor: writePalette.white,
+        activeInputColor: writePalette.lightBlue,
         errorColor: 'red',
     };
 
