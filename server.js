@@ -45,6 +45,12 @@ app.prepare().then(() => {
         path: '/api',
     });
 
+    server.get('/read/:slug', (req, res) => {
+        console.log(req)
+        const mergedQuery = Object.assign({}, req.query, req.params)
+        return app.render(req, res, '/read', mergedQuery);
+    });
+
     if (!dev)
         server.get('/', (req, res) => {
             renderWithCache(req, res, '/');
