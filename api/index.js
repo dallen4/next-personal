@@ -29,6 +29,7 @@ const graphqlApi = new ApolloServer({
         ],
     },
     subscriptions: {
+        path: '/api',
         onConnect: () => console.log('connected...'),
     },
 });
