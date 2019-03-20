@@ -11,6 +11,11 @@ body {
     font-family: 'Montserrat', 'Open Sans', monospace;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 .code {
     font-family: 'Source Code Pro', monospace;
 }
@@ -20,7 +25,7 @@ body {
     width: 100%;
 }
 
-button {
+button, input {
     border: none;
     outline: none;
 }
