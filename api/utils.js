@@ -2,6 +2,17 @@
 
 const jwt = require('jsonwebtoken');
 
+function decodeToken(token) {
+    token.replace('Bearer ', '');
+
+    try {
+        const data = jwt.verify(token, process.env.APP_SECRET);
+        return data;
+    } catch (err) {
+        throw new Error('Not authenticated');
+    }
+}
+
 function getUserId(context) {
 
     const authToken = context.request.get('x-auth');
@@ -13,9 +24,9 @@ function getUserId(context) {
     }
 
     throw new Error('Not authenticated');
-    
 }
 
 module.exports = {
-    getUserId
+    decodeToken,
+    getUserId,
 };
