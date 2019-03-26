@@ -7,6 +7,8 @@ const { importSchema } = require('graphql-import');
 const typeDefs = importSchema('api/schema.graphql');
 const resolvers = require('./resolvers');
 
+const { decodeToken } = require('./utils');
+
 // create graphql schema
 const schema = makeExecutableSchema({
     typeDefs,
@@ -27,6 +29,19 @@ const graphqlApi = new ApolloServer({
                 endpoint: '/api',
             },
         ],
+    },
+    context: ({ req }) => {
+        let user = null;
+
+        if (req.headers['x-auth']) {
+            try {
+                user = decodeToken(req.headers['x-auth']);
+            } catch (err) {
+                throw new AuthenticationError('Invalid ID token provided');
+            }
+        }
+
+        return { user };
     },
     subscriptions: {
         path: '/api',
