@@ -50,6 +50,25 @@ PostSchema.statics.generateSlug = async function(title) {
 
 };
 
+// finds post by slug
+PostSchema.statics.findBySlug = async function(slug) {
+
+    var Posts = this;
+
+    try {
+        let post = await Posts.findOne({ slug });
+
+        if (!post)
+            throw new Error('Could not retrieve post');
+
+        return post;
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// Post INSTANCE METHODS
+
 PostSchema.methods.toJSON = async function() {
 
     var postObject = this.toObject();
