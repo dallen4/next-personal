@@ -30,6 +30,10 @@ app.prepare().then(() => {
     const server = express();
     const mongoose = require('./api/dbms');
 
+    // check whether database needs to be populated with root user
+    const { checkForUpdates } = require('./updates');
+    checkForUpdates();
+
     // mount express middleware
     server.use(cors());
     server.use(helmet());
@@ -45,31 +49,40 @@ app.prepare().then(() => {
         path: '/api',
     });
 
+    // handle parameterized routes for /read
     server.get('/read/:slug', (req, res) => {
         console.log(req)
         const mergedQuery = Object.assign({}, req.query, req.params)
         return app.render(req, res, '/read', mergedQuery);
     });
 
+    // if prod, render index route with cache
     if (!dev)
         server.get('/', (req, res) => {
             renderWithCache(req, res, '/');
         });
 
+    // default handler
     server.get('*', (req, res) => {
         return handler(req, res);
     });
 
+    // wrap with http
     const httpServer = createServer(server);
+
+    // add subscription handlers
     graphqlApi.installSubscriptionHandlers(httpServer);
 
     httpServer.listen(PORT, (err) => {
         if (err) throw err;
-        console.log(`server started on port ${PORT}...\nAPI at ${graphqlApi.graphqlPath} and Subscriptions at ${graphqlApi.subscriptionsPath}`);
+        console.log(`server started on port ${PORT}...\n
+            API at ${graphqlApi.graphqlPath}\n
+            Subscriptions at ${graphqlApi.subscriptionsPath}`);
     });
 
 }).catch(error => console.error(error));
 
+// checks if page exists in cache, generates html if need be
 async function renderWithCache(req, res, pagePath, queryParams) {
 
     const key = `${req.url}`;
