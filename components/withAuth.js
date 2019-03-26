@@ -5,7 +5,6 @@ import { isAuthenticated } from '../lib/auth';
 export default Child => (
     class withAuth extends Component {
         componentDidMount() {
-            console.log(isAuthenticated())
             if (!isAuthenticated()) Router.replace('/');
         }
 
