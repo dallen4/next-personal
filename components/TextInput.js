@@ -1,16 +1,27 @@
 // TextEditor component
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { writePalette } from '../styles/colors';
 
 export default class TextEditor extends Component {
 
-    static propTypes = {};
+    static propTypes = {
+        label: PropTypes.string.isRequired,
+        inputColor: PropTypes.string,
+        activeInputColor: PropTypes.string,
+        errorMsg: PropTypes.string,
+        errorColor: PropTypes.string,
+        onChange: PropTypes.func,
+        validateInput: PropTypes.func,
+    };
 
     static defaultProps = {
         label: 'input',
         inputColor: writePalette.white,
         activeInputColor: writePalette.lightBlue,
+        errorMsg: 'Input length must be greater than 1',
         errorColor: 'red',
+        validateInput: input => input.length > 0,
     };
 
     constructor(props) {
@@ -25,6 +36,8 @@ export default class TextEditor extends Component {
 
     _onChange = event => {
         this.setState({ input: event.target.value });
+        if (this.props.onChange)
+            this.props.onChange(event.target.value);
     };
 
     _onFocus = () => {
@@ -34,8 +47,10 @@ export default class TextEditor extends Component {
 
     _onBlur = () => {
         this.toggleIsActive(false);
-        if (this.state.input.length === 0)
-            this.setState({ hasError: true });
+        let { input } = this.state;
+        this.setState({
+            hasError: !this.props.validateInput(input)
+        });
     };
 
     toggleIsActive = isActive => {
@@ -44,6 +59,8 @@ export default class TextEditor extends Component {
 
     value = () => this.state.input;
 
+    containsError = () => this.state.hasError;
+
     render() {
         let {
             label,
@@ -51,11 +68,16 @@ export default class TextEditor extends Component {
             activeInputColor,
             errorColor
         } = this.props;
-        let { isActive, hasError } = this.state;
+
+        let {
+            input,
+            isActive,
+            hasError,
+        } = this.state;
 
         let color = isActive ? activeInputColor : hasError ? errorColor : inputColor;
         return (
-            <div>
+            <div style={{ display: 'block' }} >
                 <p style={{
                     display: 'inline-block',
                     paddingRight: '10px',
@@ -70,16 +92,16 @@ export default class TextEditor extends Component {
                         backgroundColor: 'transparent',
                         color,
                         borderBottom: `1px solid ${color}`,
-                        fontSize: '0.85rem'
+                        fontSize: '0.85rem',
+                        marginRight: '8px',
                     }}
-                    value={this.state.input}
+                    value={input}
                     onChange={this._onChange}
                     onFocus={this._onFocus}
                     onBlur={this._onBlur}
                 />
                 {hasError && <p
                     style={{
-                        paddingLeft: '8px',
                         display: 'inline-block',
                         color: 'red',
                         fontSize: '0.7rem'
