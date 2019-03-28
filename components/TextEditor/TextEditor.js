@@ -73,8 +73,13 @@ export default class TextEditor extends Component {
         return markup;
     };
 
+    isEmpty = () => {
+        let { editorState } = this.state;
+        return !editorState.getCurrentContent().hasText();
+    };
+
     render() {
-        const { editorState } = this.state;
+        const { editorState, rendered } = this.state;
 
         const toolbarStyle = {
             display: 'block',
@@ -104,7 +109,7 @@ export default class TextEditor extends Component {
                     }}
                     onClick={this.onClickEditor}
                 >
-                    {this.state.rendered && (
+                    {rendered && (
                         <Editor
                             customStyleMap={styleMap}
                             editorState={editorState}
@@ -113,7 +118,6 @@ export default class TextEditor extends Component {
                             placeholder="Tell a story..."
                             spellCheck={true}
                             ref={ref => this.editor = ref}
-                            onBlur={() => this.props.onContentChange(this.getHTML())}
                         />
                     )}
                 </div>
