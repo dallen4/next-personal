@@ -3,7 +3,7 @@ import { homePalette } from '../../styles/colors';
 
 const styles = {
     formWrapper: {
-        backgroundColor: 'red',
+        backgroundColor: homePalette.gray,
         height: '300px',
         padding: '30px',
         borderRadius: '10px'

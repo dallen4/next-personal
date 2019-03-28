@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import validator from 'validator';
 import { Mutation } from 'react-apollo';
+import Button from '../Button';
+import TextInput from '../TextInput';
+import { writePalette } from '../../styles/colors';
 import { LOGIN } from '../../lib/mutations/user';
 import { styles } from './styles';
-import validator from 'validator';
 
 class LoginForm extends Component {
 
@@ -26,20 +29,15 @@ class LoginForm extends Component {
         onAuthComplete: PropTypes.func.isRequired,
     };
 
-    handleEmail(event) {
-        this.setState({ email: event.target.value });
-    }
+    handleEmail = (email) => this.setState({ email });
 
-    validateEmail() {
-        let { email } = this.state;
-        let isEmail = validator.isEmail(email);
-        let isValid = email.endsWith('@the-allen-group.com');
-        this.setState({ isValidEmail: isEmail && isValid });
-    }
+    validateEmail = email => {
+        let isValidEmail = validator.isEmail(email);
+        this.setState({ isValidEmail });
+        return isValidEmail;
+    };
 
-    handlePassword(event) {
-        this.setState({ password: event.target.value });
-    }
+    handlePassword = password => this.setState({ password });
 
     render() {
 
@@ -53,75 +51,52 @@ class LoginForm extends Component {
                     password,
                 }}
                 onCompleted={data => this.props.onAuthComplete(data.login)}
-                onError={error => {console.log(error)}}
+                onError={error => console.error(error)}
                 
             >
                 {(mutation, { loading, error }) => (
-                    <div className='formWrapper'>
+                    <div
+                        style={{
+                            marginTop: '90px',
+                            padding: '35px',
+                            paddingLeft: '50px',
+                            paddingRight: '50px',
+                            borderRadius: '5px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-around',
+                            height: '240px',
+                            width: '340px',
+                            backgroundColor: writePalette.green,
+                        }}
+                    >
 
-                        <h3>Login</h3>
+                        <h3 style={{ color: writePalette.white }} >Login</h3>
 
-                        {error && (
-                            <p>
-                                {error.message.replace('GraphQL error: ', '')}
-                            </p>
-                        )}
-        
-                        <form
-                            onSubmit={event => {
-                                event.preventDefault();
-                                mutation();
-                            }}
-                        >
-        
-                            <label style={{
-                                width:'100px',
-                                clear:'left',
-                                textAlign:'right',
-                                paddingRight:'10px',
-                                float: 'left',
-                            }} >
-                                Email
-                            </label>
-                                <input type='email'
-                                    required
-                                    placeholder='Email'
-                                    name='email'
-                                    autoComplete='off'
-                                    value={email}
-                                    onChange={this.handleEmail}
-                                    onBlur={this.validateEmail} />
-                            {!isValidEmail && (
-                                <p>Invalid email provided</p>
-                            )}
-                            <br />
-                            <label style={{
-                                width:'100px',
-                                clear:'left',
-                                textAlign:'right',
-                                paddingRight:'10px',
-                                float: 'left',
-                            }} >
-                                Password
-                            </label>
-                                <input type='password'
-                                    required
-                                    placeholder='Password'
-                                    name='pwd'
-                                    autoComplete='off'
-                                    value={password}
-                                    onChange={this.handlePassword} />
-                            <br />
-                            <button
-                                disabled={loading || !isValidEmail}
-                                className='button'
-                                style={{ marginTop: '15px' }}
-                                onClick={mutation}
-                            >
-                                {loading ? 'Loading...' : 'Login'}
-                            </button>
+                        <p style={{ color: 'red', fontSize: '0.9rem' }} >
+                            {error && error.message.replace('GraphQL error: ', '')}
+                        </p>
 
-                        </form>
+                        <TextInput
+                            ref={ref => this.emailInput = ref}
+                            label={'email'}
+                            onChange={this.handleEmail}
+                            validateInput={this.validateEmail}
+                            errorMsg={'invalid email provided'}
+                        />
+
+                        <TextInput
+                            ref={ref => this.passwordInput = ref}
+                            label={'password'}
+                            onChange={this.handlePassword}
+                            errorMsg={'password cannot be empty'}
+                        />
+
+                        <Button
+                            label={loading ? 'Loading...' : 'Login'}
+                            onClick={mutation}
+                            disabled={loading || !isValidEmail}
+                        />
                     </div>
                 )}
             </Mutation>
