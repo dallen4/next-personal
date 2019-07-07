@@ -1,9 +1,7 @@
 // import api, app, & server modules
 const express = require('express');
-const { createServer } = require('http');
 const next = require('next');
 const LRUCache = require('lru-cache');
-const { graphqlApi } = require('./api');
 require('dotenv').config();
 
 // import express middlewares
@@ -28,11 +26,6 @@ const ssrCache = new LRUCache({
 app.prepare().then(() => {
 
     const server = express();
-    const mongoose = require('./api/dbms');
-
-    // check whether database needs to be populated with root user
-    const { checkForUpdates } = require('./updates');
-    checkForUpdates();
 
     // mount express middleware
     server.use(cors());
@@ -43,17 +36,16 @@ app.prepare().then(() => {
     let logMode = dev ? 'dev' : 'combined';
     server.use(morgan(logMode));
 
-    // mount graphql endpoint
-    graphqlApi.applyMiddleware({
-        app: server,
-        path: '/api',
+    // handle parameterized routes for /blog
+    server.get('/blog/:category', (req, res) => {
+        const mergedQuery = Object.assign({}, req.query, req.params);
+        return app.render(req, res, '/blog', mergedQuery);
     });
 
-    // handle parameterized routes for /read
-    server.get('/read/:slug', (req, res) => {
-        console.log(req)
-        const mergedQuery = Object.assign({}, req.query, req.params)
-        return app.render(req, res, '/read', mergedQuery);
+    // handle parameterized routes for /post
+    server.get('/post/:slug', (req, res) => {
+        const mergedQuery = Object.assign({}, req.query, req.params);
+        return app.render(req, res, '/post', mergedQuery);
     });
 
     // if prod, render index route with cache
@@ -67,17 +59,9 @@ app.prepare().then(() => {
         return handler(req, res);
     });
 
-    // wrap with http
-    const httpServer = createServer(server);
-
-    // add subscription handlers
-    graphqlApi.installSubscriptionHandlers(httpServer);
-
-    httpServer.listen(PORT, (err) => {
+    server.listen(PORT, (err) => {
         if (err) throw err;
-        console.log(`server started on port ${PORT}...\n
-            API at ${graphqlApi.graphqlPath}\n
-            Subscriptions at ${graphqlApi.subscriptionsPath}`);
+        console.log(`server started on port ${PORT}...\n`);
     });
 
 }).catch(error => console.error(error));
