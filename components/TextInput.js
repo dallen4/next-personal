@@ -1,9 +1,9 @@
-// TextEditor component
+// TextInput component
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { writePalette } from '../styles/colors';
 
-export default class TextEditor extends Component {
+export default class TextInput extends Component {
 
     static propTypes = {
         label: PropTypes.string.isRequired,
