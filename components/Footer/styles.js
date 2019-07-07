@@ -10,6 +10,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
+        // backgroundColor: 'inherit',
     },
     linkContainer: {
         flex: 1,

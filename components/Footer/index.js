@@ -9,7 +9,7 @@ import { FaSoundcloud } from 'react-icons/fa';
 import { styles } from './styles';
 
 export default () => (
-    <footer style={styles.footer} >
+    <footer className={'footer'} style={styles.footer} >
         <div style={styles.linkContainer} >
             <a
                 href="mailto:nieky.allen@gmail.com"
@@ -44,7 +44,7 @@ export default () => (
         </div>
         <div style={styles.copyrightContainer} >
             <p className="code" style={styles.copyright} >
-                copyright &copy; dominique allen 2019.
+                copyright &copy; nieky allen 2019.
             </p>
         </div>
     </footer>
