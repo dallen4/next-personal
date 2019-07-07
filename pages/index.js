@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import VisibilitySensor from 'react-visibility-sensor';
 import ScrollIndicatorPage from '../components/ScrollIndicatorPage';
 import CircleGraph from '../components/CircleGraph';
@@ -17,6 +16,7 @@ import '../styles/index.css';
 import { styles } from '../styles';
 import Footer from '../components/Footer';
 import { homePalette } from '../styles/colors';
+import Head from '../components/Head';
 
 // init with default values to compensate for SSR
 let scrollToComponent = () => {};
@@ -34,7 +34,6 @@ export default class Home extends React.Component {
 
         this.updateActiveSection = this.updateActiveSection.bind(this);
         this.backToTop = this.backToTop.bind(this);
-        this.renderMeta = this.renderMeta.bind(this);
         this.renderNavLinks = this.renderNavLinks.bind(this);
     }
 
@@ -66,20 +65,6 @@ export default class Home extends React.Component {
             this.setState({ isScrolling: false });
         });
     };
-
-    renderMeta = () => (
-        <Head>
-            <title>Nieky Allen</title>
-            <meta charSet="utf-8" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-            <meta name="theme-color" content="#000000" />
-            <meta name="description" content="personal website for Nieky Allen" />
-            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        </Head>
-    );
 
     renderNavLinks() {
         let { activeSection } = this.state;
@@ -144,7 +129,7 @@ export default class Home extends React.Component {
 
         return (
             <ScrollIndicatorPage>
-                {this.renderMeta()}
+                <Head/>
                 <style global jsx>{`
                     body {
                         background: rgb(51, 54, 57);
