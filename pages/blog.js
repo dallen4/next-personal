@@ -8,6 +8,7 @@ import NavLinks from '../components/blog/NavLinks';
 import SubscribeButton from '../components/blog/SubscribeButton';
 import Banner from '../components/blog/Banner';
 import Footer from '../components/blog/Footer';
+import CategoryNav from '../components/blog/CategoryNav';
 
 const Blog = (props) => {
     let { category, pathname } = props;
@@ -29,56 +30,21 @@ const Blog = (props) => {
                             maxWidth: 'auto',
                             alignSelf: 'flex-end',
                             paddingBottom: '20px',
+                            overflowX: 'scroll',
                         }}
                     >
-                        <NavLinks
-                            linkSections={[
-                                [
-                                    {
-                                        label: 'All',
-                                        to: '/blog',
-                                    },
-                                    {
-                                        label: 'Technology',
-                                        to: '/blog/technology',
-                                    },
-                                    {
-                                        label: 'Lifestyle',
-                                        to: '/blog/lifestyle',
-                                    },
-                                ],
-                            ]}
-                        />
+                        <CategoryNav/>
                     </div>
-                    <PostList
-                        onPostClick={(slug) => Router.push(`/post/${slug}`)}
-                    />
+                    <PostList category={category} />
                 </main>
                 <section className={'about-me'}>
-                    <div
-                        style={{
-                            height: 'calc(100% - 100px)',
-                            backgroundColor: 'rgb(246,246,246)',
-                            borderTopLeftRadius: '35px',
-                            borderBottomLeftRadius: '35px',
-                            padding: '45px',
-                            display: 'flex',
-                            justifyContent: 'flex-start',
-                            alignItems: 'flex-start',
-                        }}
-                    >
+                    <div className={'about-content'} >
                         <img
                             src="/static/img/nieky-1871.jpg"
-                            style={{
-                                height: '300px',
-                                width: 'auto',
-                                margin: '-95px 25px 0 0',
-                                borderRadius: '7px',
-                            }}
                         />
                         <div>
                             <h1>About Me</h1>
-                            <p style={{ opacity: 0.7, maxWidth: '80%' }}>
+                            <p style={{ paddingTop: '10px', opacity: 0.7, maxWidth: '100%' }}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                 sed do eiusmod tempor incididunt ut labore et dolore magna
                                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation
