@@ -1,173 +1,177 @@
 import React from 'react';
 import Link from 'next/link';
-import Markdown from 'markdown-to-jsx';
 import { Query } from 'react-apollo';
 import { POST } from '../lib/queries';
-import { writePalette } from '../styles/colors';
-import Footer from '../components/Footer';
-import '../styles/read.css';
-import Highlight from 'react-highlight.js';
 import { FiArrowUp } from 'react-icons/fi';
 import Head from '../components/Head';
 import LoadingView from '../components/LoadingView';
+import Footer from '../components/blog/Footer';
+import PostBody from '../components/blog/PostBody';
+import '../styles/blog.css';
+import { formatDate } from '../lib/util';
+import CategoryLink from '../components/blog/CategoryLink';
+import NavLinks from '../components/blog/NavLinks';
+import CategoryNav from '../components/blog/CategoryNav';
+import { MobileHeader } from '../components/blog/Header';
 
-const Post = (props) => {
-    let { slug, pathname } = props;
+const DesktopNav = (
+    <nav id={'desktop-header'} className={'navbar'}>
+        <Link href="/blog">
+            <a>
+                <img src={'/static/img/nieky-logo-2.svg'} height={'30px'} />
+            </a>
+        </Link>
 
-    return (
-        <Query query={POST} variables={{ slug }} notifyOnNetworkStatusChange>
-            {({ data, loading, error, networkStatus }) => {
-                if (true || networkStatus === 4) return <LoadingView/>;
-                else if (error) return <p>{error.message}</p>;
-                else {
-                    let {
-                        title,
-                        publishedAt,
-                        updatedAt,
-                        category,
-                        description,
-                        body,
-                    } = data.postBySlug;
-
-                    let publishedAtObj = new Date(publishedAt);
-                    let updatedAtObj = new Date(updatedAt);
-
-                    let publishedString = `${publishedAtObj.toLocaleDateString(
-                        'en-US',
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+            }}
+        >
+            <CategoryNav />
+            <NavLinks
+                renderDot
+                linkSections={[
+                    [
                         {
-                            month: '2-digit',
-                            day: '2-digit',
-                            year: '2-digit',
+                            label: 'About',
+                            to: '/about',
                         },
-                    )}`;
+                        {
+                            label: 'Contact',
+                            to: '/contact',
+                        },
+                    ],
+                ]}
+            />
+        </div>
+    </nav>
+);
 
-                    let updatedString = `${updatedAtObj.toLocaleDateString('en-US', {
-                        month: '2-digit',
-                        day: '2-digit',
-                        year: '2-digit',
-                    })}`;
+const Post = ({ slug }) => (
+    <Query query={POST} variables={{ slug }} notifyOnNetworkStatusChange>
+        {({ data, loading, error, networkStatus }) => {
+            if (loading || networkStatus === 4) return <LoadingView />;
+            else if (error) return <p>{error.message}</p>;
+            else {
+                let {
+                    title,
+                    publishedAt,
+                    updatedAt,
+                    tag,
+                    description,
+                    body,
+                } = data.postBySlug;
 
-                    return (
-                        <div className={'post-page'}>
-                            <Head/>
-                            <link
-                                rel='stylesheet'
-                                href='https://highlightjs.org/static/demo/styles/railscasts.css'
+                let publishedAtObj = new Date(publishedAt);
+                let updatedAtObj = new Date(updatedAt);
+
+                let publishedString = formatDate(publishedAt);
+
+                let updatedString = formatDate(updatedAt);
+
+                return (
+                    <div className={'post-page'}>
+                        <Head />
+                        <link
+                            rel="stylesheet"
+                            href="https://highlightjs.org/static/demo/styles/railscasts.css"
+                        />
+                        <div
+                            style={{
+                                position: 'fixed',
+                                bottom: 0,
+                                right: 0,
+                                padding: 0,
+                                marginBottom: '8px',
+                                borderTopLeftRadius: '50%',
+                                borderBottomLeftRadius: '50%',
+                                backgroundColor: 'rgba(180,180,180,0.6)',
+                            }}
+                        >
+                            <FiArrowUp
+                                className="button"
+                                onClick={() => {}}
+                                size={35}
+                                color="white"
+                                strokeWidth={'0.5px'}
                             />
-                            <div
+                            <p style={{ padding: 0 }}>Top</p>
+                        </div>
+                        {MobileHeader}
+                        {DesktopNav}
+                        <header className={'title'}>
+                            <Link href="/blog">
+                                <a
+                                    style={{
+                                        color: 'rgb(237,56,57)',
+                                    }}
+                                >
+                                    <p>back to posts</p>
+                                </a>
+                            </Link>
+                            <h1
                                 style={{
-                                    position: 'fixed',
-                                    bottom: 0,
-                                    right: 0,
-                                    padding: 0,
-                                    marginBottom: '8px',
-                                    borderTopLeftRadius: '50%',
-                                    borderBottomLeftRadius: '50%',
-                                    backgroundColor: 'rgba(180,180,180,0.6)',
+                                    marginTop: '2rem',
+                                    marginBottom: '0.7rem',
+                                    color: 'rgb(21,24,28)',
                                 }}
                             >
-                                <FiArrowUp
-                                    className='button'
-                                    onClick={() => {}}
-                                    size={35}
-                                    color='white'
-                                    strokeWidth={'0.5px'}
-                                />
-                                <p style={{ padding: 0 }}>Top</p>
-                            </div>
-                            <header className={'title'}>
-                                <Link href='/blog'>
-                                    <p
-                                        style={{
-                                            cursor: 'pointer',
-                                            color: writePalette.blue,
-                                            textDecoration: 'underline',
-                                        }}
-                                    >
-                                        back to posts
-                                    </p>
-                                </Link>
-                                <h1
+                                {title}
+                            </h1>
+                            <p
+                                style={{
+                                    paddingBottom: '4px',
+                                    color: 'rgb(129,129,129)',
+                                }}
+                            >
+                                {description}
+                            </p>
+                            <p
+                                style={{
+                                    display: 'inline',
+                                    opacity: 0.8,
+                                    color: 'rgb(129,129,129)',
+                                }}
+                            >
+                                {publishedString} &bull; In{' '}
+                            </p>
+                            <CategoryLink category={tag.name} />
+                            {updatedAtObj > publishedAtObj && (
+                                <p
                                     style={{
-                                        marginTop: '2rem',
-                                        marginBottom: '1rem',
-                                        color: writePalette.lightBlue,
+                                        opacity: 0.8,
+                                        textDecoration: 'none',
+                                        color: 'rgb(129,129,129)',
                                     }}
                                 >
-                                    {title}
-                                </h1>
-                                <p>{description}</p>
-                                <p style={{ opacity: 0.8 }}>
-                                    {publishedString} &#xB7; In{' '}
-                                    <a
-                                        style={{
-                                            color: 'orange',
-                                            fontStyle: 'italic',
-                                            textDecoration: 'underline',
-                                        }}
-                                    >
-                                        {category}
-                                    </a>
+                                    last updated {updatedString}
                                 </p>
-                                {updatedAtObj > publishedAtObj && (
-                                    <p style={{ opacity: 0.8 }}>
-                                        <span
-                                            style={{
-                                                color: writePalette.lightBlue,
-                                            }}
-                                        >
-                                            last updated
-                                        </span>{' '}
-                                        {updatedString}
-                                    </p>
-                                )}
-                            </header>
-                            <main className={'content'}>
-                                <Markdown
-                                    options={{
-                                        overrides: {
-                                            div: {
-                                                props: {
-                                                    className: 'content',
-                                                },
-                                            },
-                                            code: {
-                                                component: ({
-                                                    children,
-                                                    ...props
-                                                }) => {
-                                                    if (props.className)
-                                                        return (
-                                                            <Highlight {...props}>
-                                                                {children}
-                                                            </Highlight>
-                                                        );
-                                                    else
-                                                        return (
-                                                            <code>{children}</code>
-                                                        );
-                                                },
-                                            },
-                                        },
-                                    }}
-                                >
-                                    {body}
-                                </Markdown>
-                            </main>
-                            <Footer />
-                        </div>
-                    );
-                }
-            }}
-        </Query>
-    );
-};
+                            )}
+                        </header>
+                        <section className={'banner-img'}>
+                            <img
+                                src={
+                                    'https://images.unsplash.com/photo-1559657693-e816ff3bd9af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80'
+                                }
+                                width={'100%'}
+                            />
+                        </section>
+                        <main className={'content'}>
+                            <PostBody body={body} />
+                        </main>
+                        <Footer />
+                    </div>
+                );
+            }
+        }}
+    </Query>
+);
 
-Post.getInitialProps = async ({ query, pathname }) => {
+Post.getInitialProps = async ({ query }) => {
     return {
-        pathname,
         slug: query.slug,
     };
-}
+};
 
 export default Post;
