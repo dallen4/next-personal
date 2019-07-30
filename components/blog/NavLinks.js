@@ -2,7 +2,19 @@ import React from 'react';
 import { withRouter } from 'next/router';
 import Link from 'next/link';
 
-const BlogNavLinks = ({ linkSections, router }) => {
+const BlogNavLinks = ({ linkSections, renderDot, activeWhite, router }) => {
+
+    let activeStyles = {
+        color: 'rgb(237,56,57)',
+        borderBottom: '2px solid rgb(237,56,57)',
+    };
+
+    if (activeWhite)
+        activeStyles = {
+            color: 'white',
+            borderBottom: 0,
+        };
+
     const links = linkSections.map((section, sectionIndex) => (
         <ul key={sectionIndex} >
             <style jsx>{`
@@ -18,7 +30,7 @@ const BlogNavLinks = ({ linkSections, router }) => {
                 }
 
                 li {
-                    padding: 0 20px 0 20px;
+                    padding: 0 15px 0 15px;
                     display: inline;
                     color: rgb(129,129,129);
                 }
@@ -30,12 +42,12 @@ const BlogNavLinks = ({ linkSections, router }) => {
                 }
 
                 a.active, li a:hover {
-                    color: rgb(237,56,57);
-                    border-bottom: 2px solid rgb(237,56,57);
+                    color: ${activeStyles.color};
+                    border-bottom: ${activeStyles.borderBottom};
                 }
 
             `}</style>
-            {sectionIndex > 0 && (
+            {(sectionIndex > 0 || renderDot) && (
                 <li>&bull;</li>
             )}
             {section.map(({ label, to }) => (
