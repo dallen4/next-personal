@@ -1,9 +1,8 @@
 import React from 'react';
 import Router from 'next/router';
-import NavLinks from './NavLinks';
 import Button from './Button';
-import { stringToProper } from '../../lib/util';
 import CategoryLink from './CategoryLink';
+import Header from './Header';
 
 let content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
@@ -24,9 +23,9 @@ export default function Banner() {
                 }
             `}</style>
             <div
+                className={'home-banner'}
                 style={{
                     height: '100%',
-                    width: 'calc(100vw - 45px)',
                     borderBottomRightRadius: '45px',
                     overflow: 'hidden',
                     background: `url('https://images.unsplash.com/photo-1494522855154-9297ac14b55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')`,
@@ -43,49 +42,7 @@ export default function Banner() {
                         justifyContent: 'flex-start',
                     }}
                 >
-                    <header
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            padding: '12px 20px 12px 20px',
-                        }}
-                    >
-                        <img src={'/static/img/nieky-logo-2.svg'} height={'35px'} />
-                        <nav
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                            }}
-                        >
-                            <NavLinks
-                                linkSections={[
-                                    [
-                                        {
-                                            label: 'Technology',
-                                            to: '/blog/technology',
-                                        },
-                                        {
-                                            label: 'Lifestyle',
-                                            to: '/blog/lifestyle',
-                                        },
-                                    ],
-                                    [
-                                        {
-                                            label: 'About',
-                                            to: '/about',
-                                        },
-                                        {
-                                            label: 'Contact',
-                                            to: '/contact',
-                                        },
-                                    ],
-                                ]}
-                            />
-                        </nav>
-                    </header>
+                    <Header/>
                     <div
                         style={{
                             flex: 1,
@@ -95,13 +52,12 @@ export default function Banner() {
                         }}
                     >
                         <div
+                            className={'banner-content'}
                             style={{
-                                flex: 0.5,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'space-evenly',
                                 alignItems: 'flex-start',
-                                padding: '15px 35px 40px 0',
                             }}
                         >
                             <h1 className={'post-title'} >
