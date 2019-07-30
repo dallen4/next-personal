@@ -41,7 +41,7 @@ function CategoryLink({ category }) {
     }
 
     return (
-        <Link>
+        <Link href={`/blog/${category}`} >
             <a
                 style={{
                     cursor: 'pointer',
@@ -50,6 +50,7 @@ function CategoryLink({ category }) {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     color,
+                    zIndex: 10,
                 }}
             >
                 <p
@@ -63,6 +64,7 @@ function CategoryLink({ category }) {
                 <span
                     style={{
                         height: '12px',
+                        width: '12px',
                         padding: '2px',
                         borderRadius: '8px',
                         backgroundColor: 'white',
