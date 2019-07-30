@@ -30,7 +30,7 @@ button, input {
     outline: none;
 }
 
-button:hover {
+button:hover, a:hover {
     cursor: pointer;
 }
 
