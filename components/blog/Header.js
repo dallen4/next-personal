@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavLinks from './NavLinks';
 import CategoryNav from './CategoryNav';
-import Sidebar from 'react-sidebar';
+import Icon from 'efflux-icons';
 
-export const MobileHeader = (
+export const MobileHeader = ({ toggleSiderbar }) => (
     <header id={'mobile-header'} className={'blog-header navbar'}>
-        <img src={'/static/img/nieky-logo-2.svg'} height={'35px'} />
+        <div onClick={toggleSiderbar} style={{ alignSelf: 'flex-start' }}>
+            <Icon name={'Menu'} color={'white'} size={'35px'} />
+            <img
+                src={'/static/img/nieky-logo-2.svg'}
+                height={'35px'}
+                style={{ paddingLeft: '10px', }}
+            />
+        </div>
         <nav
             style={{
                 display: 'flex',
@@ -21,12 +28,12 @@ export const MobileHeader = (
                     [
                         {
                             label: 'About',
-                            to: '/about',
+                            to: '/blog#about',
                         },
-                        {
-                            label: 'Contact',
-                            to: '/contact',
-                        },
+                        // {
+                        //     label: 'Contact',
+                        //     to: '/contact',
+                        // },
                     ],
                 ]}
             />
@@ -35,10 +42,13 @@ export const MobileHeader = (
 );
 
 const Header = () => {
-    if (false) return MobileHeader;
     return (
         <header id={'desktop-header'} className={'blog-header'}>
-            <img src={'/static/img/nieky-logo-2.svg'} height={'35px'} />
+            <Link href="/blog">
+                <a style={{ alignSelf: 'flex-start' }} >
+                    <img src={'/static/img/nieky-logo-2.svg'} height={'30px'} />
+                </a>
+            </Link>
             <nav
                 style={{
                     display: 'flex',
@@ -53,7 +63,7 @@ const Header = () => {
                         [
                             {
                                 label: 'About',
-                                to: '/about',
+                                to: '/blog#about',
                             },
                             {
                                 label: 'Contact',
