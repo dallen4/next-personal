@@ -98,6 +98,10 @@ ul {
     grid-area: content;
 }
 
+.post-content {
+    padding-bottom: 20px;
+}
+
 .blog-page .content p {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
