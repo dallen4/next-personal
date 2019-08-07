@@ -13,7 +13,7 @@ import CategoryNav from '../components/blog/CategoryNav';
 const Blog = (props) => {
     let { category, pathname } = props;
         return (
-            <div className={'blog-page'}>
+            <div id={'page-root'} className={'blog-page'}>
                 <Head/>
                 <Banner/>
                 <main
@@ -37,7 +37,7 @@ const Blog = (props) => {
                     </div>
                     <PostList category={category} />
                 </main>
-                <section className={'about-me'}>
+                <section id={'about'} className={'about-me'}>
                     <div className={'about-content'} >
                         <img
                             src="/static/img/nieky-1871.jpg"

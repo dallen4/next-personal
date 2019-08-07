@@ -48,7 +48,7 @@ const DesktopNav = (
     </nav>
 );
 
-const Post = ({ slug }) => (
+const Post = ({ slug, toggleSidebar }) => (
     <Query query={POST} variables={{ slug }} notifyOnNetworkStatusChange>
         {({ data, loading, error, networkStatus }) => {
             if (loading || networkStatus === 4) return <LoadingView />;
@@ -61,6 +61,8 @@ const Post = ({ slug }) => (
                     tag,
                     description,
                     body,
+                    imageUrl,
+                    imageCaption,
                 } = data.postBySlug;
 
                 let publishedAtObj = new Date(publishedAt);
@@ -71,11 +73,11 @@ const Post = ({ slug }) => (
                 let updatedString = formatDate(updatedAt);
 
                 return (
-                    <div className={'post-page'}>
+                    <div id={'page-root'} className={'post-page'}>
                         <Head />
                         <link
-                            rel="stylesheet"
-                            href="https://highlightjs.org/static/demo/styles/railscasts.css"
+                            rel='stylesheet'
+                            href='https://highlightjs.org/static/demo/styles/railscasts.css'
                         />
                         <div
                             style={{
@@ -89,19 +91,20 @@ const Post = ({ slug }) => (
                                 backgroundColor: 'rgba(180,180,180,0.6)',
                             }}
                         >
+                            <a href={'#page-root'} >
                             <FiArrowUp
-                                className="button"
-                                onClick={() => {}}
+                                className={'button'}
                                 size={35}
-                                color="white"
+                                color='white'
                                 strokeWidth={'0.5px'}
                             />
                             <p style={{ padding: 0 }}>Top</p>
+                            </a>
                         </div>
-                        {MobileHeader}
+                        {MobileHeader({ toggleSiderbar: toggleSidebar })}
                         {DesktopNav}
                         <header className={'title'}>
-                            <Link href="/blog">
+                            <Link href='/blog'>
                                 <a
                                     style={{
                                         color: 'rgb(237,56,57)',
@@ -152,12 +155,13 @@ const Post = ({ slug }) => (
                         <section className={'banner-img'}>
                             <img
                                 src={
-                                    'https://images.unsplash.com/photo-1559657693-e816ff3bd9af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80'
+                                    imageUrl ||
+                                    'https://images.unsplash.com/photo-1565094919597-70e3022e7c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80'
                                 }
                                 width={'100%'}
                             />
                         </section>
-                        <main className={'content'}>
+                        <main className={'content post-content'}>
                             <PostBody body={body} />
                         </main>
                         <Footer />
