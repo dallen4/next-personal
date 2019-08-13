@@ -24,7 +24,7 @@ const LoadingView = ({ loading, message, error, errorMsg, fullscreen }) => {
                     loading={loading && !error}
                 />
             </div>
-            <p>{error ? errorMsg : message}</p>
+            <p style={{ color: 'white' }} >{error ? errorMsg : message}</p>
         </div>
     );
 }
