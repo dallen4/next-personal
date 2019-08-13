@@ -49,10 +49,22 @@ const DesktopNav = (
 );
 
 const Post = ({ slug, toggleSidebar }) => (
-    <Query query={POST} variables={{ slug }} notifyOnNetworkStatusChange>
+    <Query
+        query={POST}
+        variables={{ slug }}
+        notifyOnNetworkStatusChange
+        fetchPolicy={'cache-first'}
+    >
         {({ data, loading, error, networkStatus }) => {
-            if (loading || networkStatus === 4) return <LoadingView />;
-            else if (error) return <p>{error.message}</p>;
+            if (loading || networkStatus === 4 || error || data.postBySlug === null)
+                return (
+                    <LoadingView
+                        fullscreen={true}
+                        loading={loading}
+                        error={error || data.postBySlug === null}
+                        errorMsg={'Issue fetching post...'}
+                    />
+                );
             else {
                 let {
                     title,
@@ -62,7 +74,6 @@ const Post = ({ slug, toggleSidebar }) => (
                     description,
                     body,
                     imageUrl,
-                    imageCaption,
                 } = data.postBySlug;
 
                 let publishedAtObj = new Date(publishedAt);
@@ -101,7 +112,7 @@ const Post = ({ slug, toggleSidebar }) => (
                             <p style={{ padding: 0 }}>Top</p>
                             </a>
                         </div>
-                        {MobileHeader({ toggleSiderbar: toggleSidebar })}
+                        {MobileHeader({ toggleSidebar: toggleSidebar })}
                         {DesktopNav}
                         <header className={'title'}>
                             <Link href='/blog'>
