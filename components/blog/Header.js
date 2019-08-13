@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import NavLinks from './NavLinks';
 import CategoryNav from './CategoryNav';
 import Icon from 'efflux-icons';
 
-export const MobileHeader = ({ toggleSiderbar }) => (
+export const MobileHeader = ({ toggleSidebar }) => (
     <header id={'mobile-header'} className={'blog-header navbar'}>
-        <div onClick={toggleSiderbar} style={{ alignSelf: 'flex-start' }}>
+        <div onClick={toggleSidebar} style={{ alignSelf: 'flex-start' }}>
             <Icon name={'Menu'} color={'white'} size={'35px'} />
             <img
                 src={'/static/img/nieky-logo-2.svg'}
@@ -14,7 +15,7 @@ export const MobileHeader = ({ toggleSiderbar }) => (
                 style={{ paddingLeft: '10px', }}
             />
         </div>
-        <nav
+        {/* <nav
             style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -37,7 +38,7 @@ export const MobileHeader = ({ toggleSiderbar }) => (
                     ],
                 ]}
             />
-        </nav>
+        </nav> */}
     </header>
 );
 
