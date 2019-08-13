@@ -41,20 +41,47 @@ export default function Banner({ toggleSidebar }) {
                 fetchPolicy={'cache-first'}
             >
                 {({ data, loading, error, networkStatus }) => {
-                    if (loading || networkStatus === 4 || error)
+                    if (loading || networkStatus === 4 || (error && !error.networkError))
                         return (
-                            <LoadingView
-                                fullscreen={false}
-                                loading={loading}
-                                error={error}
-                                errorMsg={'Issue fetching latest post...'}
-                            />
+                            <div
+                                className={'home-banner'}
+                                style={{
+                                    height: '100%',
+                                    borderBottomRightRadius: '45px',
+                                    overflow: 'hidden',
+                                    background: `url('https://images.unsplash.com/photo-1494522855154-9297ac14b55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80)`,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        height: '100%',
+                                        width: '100%',
+                                        background:
+                                            'linear-gradient(to right, transparent, 25%, rgb(40,42,46))',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'flex-start',
+                                    }}
+                                >
+                                    <Header />
+                                    <MobileHeader
+                                        toggleSidebar={toggleSidebar}
+                                    />
+                                    <LoadingView
+                                        dark={true}
+                                        fullscreen={false}
+                                        loading={loading}
+                                        error={error}
+                                        errorMsg={'Issue fetching latest post...'}
+                                    />
+                                </div>
+                            </div>
                         );
                     else {
 
                         let featuredPost = postPlaceholder;
 
-                        if (data.posts.length > 0)
+                        if (data && data.posts.length > 0)
                             featuredPost = data.posts[0];
 
                         let {
