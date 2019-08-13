@@ -27,8 +27,13 @@ ul {
 #mobile-header {
     background-color: rgb(21,24,28);
     flex-direction: column;
-    padding: 15px 20px;
-    height: 70px;
+    width: calc(100vw - 30px);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* TODO embedded nav link */
+    /* height: 70px; */
 }
 
 #mobile-header img {
@@ -42,7 +47,7 @@ ul {
 .blog-page {
     background-color: white;
     display: grid;
-    grid-template-rows: minmax(80vh, auto) auto minmax(65vh, 1fr) 300px minmax(250px, auto);
+    grid-template-rows: minmax(80vh, auto) auto minmax(60vh, 1fr) 300px minmax(250px, auto);
     grid-template-columns: 0.1fr 1fr 0.1fr;
     grid-template-areas:
         'banner banner banner'
@@ -92,6 +97,14 @@ ul {
     justify-content: space-evenly;
     align-items: center;
     padding: 20px 0 40px 0;
+}
+
+.ReactModal__Content {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .content {
@@ -173,6 +186,25 @@ ul {
     grid-area: banner-img;
 }
 
+@media only screen and (min-width: 995px) {
+    .posts-container {
+        flex-flow: row wrap;
+    }
+}
+
+@media only screen and (max-width: 994px) {
+    .posts-container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .post-thumbnail {
+        display: none;
+    }
+}
+
 @media only screen and (min-width: 651px) {
     #desktop-header {
         display: flex;
@@ -182,16 +214,17 @@ ul {
         display: none;
     }
 
+    .ReactModal__Content {
+        height: 325px;
+        width: 500px;
+    }
+
     .post-page {
         grid-template-columns: 0.2fr 1fr 0.2fr;
     }
 
     .home-banner {
         width: calc(100vw - 45px);
-    }
-
-    .posts-container {
-        flex-flow: row wrap;
     }
 
     .post-item {
@@ -212,7 +245,7 @@ ul {
     .about-content img {
         height: 300px;
         width: auto;
-        margin: -95px 25px 20px 0;
+        margin: -95px 25px 0 0;
     }
 
     #footer-std {
@@ -241,6 +274,11 @@ ul {
         display: flex;
     }
 
+    .ReactModal__Content {
+        height: 80vh;
+        width: 80vw;
+    }
+
     .post-page {
         grid-template-columns: 0.1fr 1fr 0.1fr;
     }
@@ -249,9 +287,8 @@ ul {
         width: 100vw;
     }
 
-    .posts-container {
-        flex-direction: column;
-        justify-content: flex-start;
+    .banner-post-body {
+        display: none;
     }
 
     .post-item {
@@ -270,10 +307,14 @@ ul {
         background-color: transparent;
     }
 
+    .about-content h1 {
+        margin-top: 20px;
+    }
+
     .about-content img {
-        width: 90%;
+        width: 96%;
         height: auto;
-        margin: -95px 0 20px 0;
+        margin: -95px 0 0 0;
     }
 
     #footer-std {
