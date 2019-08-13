@@ -22,7 +22,12 @@ export default ({ category }) => {
                     padding: 0;
                 }
             `}</style>
-            {posts.map((post) => <PostItem post={post} />)}
+            {posts.map((post) => (
+                <PostItem
+                    key={post.slug}
+                    post={post}
+                />
+            ))}
         </div>
     );
 

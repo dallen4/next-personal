@@ -13,8 +13,8 @@ const PostItem = ({ post }) => {
                 minHeight: '120px',
                 borderRadius: '6px',
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
                 alignItems: 'flex-start',
             }}
             onClick={() => Router.push(`/post/${post.slug}`)}
@@ -30,19 +30,21 @@ const PostItem = ({ post }) => {
                     padding-bottom: 7px;
                 }
             `}</style>
-            {post.image && (
-                <img
-                    src="/static/img/nieky-1871.jpg"
+            {post.imageUrl && (
+                <div
+                    className={'post-thumbnail'}
                     style={{
-                        height: '110px',
-                        width: 'auto',
+                        flex: 1,
+                        objectFit: 'cover',
+                        background: `url('${post.imageUrl}') 50% 50% no-repeat`,
+                        minHeight: '120px',
                         borderRadius: '4px',
                     }}
                 />
             )}
             <div
                 style={{
-                    flex: 1,
+                    flex: 2,
                     height: 'calc(100% - 20px)',
                     paddingLeft: '10px',
                     display: 'flex',
