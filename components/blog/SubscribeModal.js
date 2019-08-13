@@ -14,23 +14,33 @@ export default class SubscribeModal extends Component {
                     overlay: {
                         backgroundColor: 'rgba(0,0,0,0.5)',
                     },
-                    content: {
-                        margin: 'auto',
-                        height: '325px',
-                        width: '500px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                    },
                 }}
             >
                 <style jsx>{`
-                    h2, p {
+                    h3, h2, p {
                         margin: 0;
                         padding: 0;
                     }
+
+                    h3 {
+                        padding-bottom: 20px;
+                    }
                 `}</style>
-                <div
+                <h3>Subscriptions coming soon!</h3>
+                <button
+                    style={{
+                        backgroundColor: 'rgb(23,171,141)',
+                        color: 'white',
+                        padding: '6px 20px 6px 20px',
+                        borderRadius: '5px',
+                    }}
+                    onClick={toggleModal}
+                >
+                    <p>
+                        Close
+                    </p>
+                </button>
+                {/* <div
                     style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -108,7 +118,7 @@ export default class SubscribeModal extends Component {
                             Subscribe
                         </p>
                     </button>
-                </div>
+                </div> */}
             </Modal>
         );
     }
