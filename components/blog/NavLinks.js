@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'next/router';
 import Link from 'next/link';
 
-const BlogNavLinks = ({ linkSections, renderDot, activeWhite, router }) => {
+const BlogNavLinks = ({ linkSections, renderDot, activeWhite, router, customStyles }) => {
 
     let activeStyles = {
         color: 'rgb(237,56,57)',
@@ -16,7 +16,7 @@ const BlogNavLinks = ({ linkSections, renderDot, activeWhite, router }) => {
         };
 
     const links = linkSections.map((section, sectionIndex) => (
-        <ul key={sectionIndex} >
+        <ul key={sectionIndex} style={customStyles} >
             <style jsx>{`
                 ul {
                     display: flex;
@@ -30,8 +30,8 @@ const BlogNavLinks = ({ linkSections, renderDot, activeWhite, router }) => {
                 }
 
                 li {
-                    padding: 0 15px 0 15px;
-                    display: inline;
+                    padding: ${Object.keys(customStyles).length > 0 ? '10px' : '0'} 15px;
+                    display: block;
                     color: rgb(129,129,129);
                 }
 
@@ -65,6 +65,10 @@ const BlogNavLinks = ({ linkSections, renderDot, activeWhite, router }) => {
     ));
 
     return links;
+};
+
+BlogNavLinks.defaultProps = {
+    customStyles: {},
 };
 
 export default withRouter(BlogNavLinks);
