@@ -1,7 +1,11 @@
 import React from 'react';
+import LoadingView from '../components/LoadingView';
 
 export default () => (
-    <div>
-        <h1>hello</h1>
-    </div>
+    <LoadingView
+        fullscreen={true}
+        loading={false}
+        error={true}
+        errorMsg={'Oops! How did you end up here?'}
+    />
 );
