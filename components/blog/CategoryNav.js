@@ -4,33 +4,39 @@ import { LIST_TAGS } from '../../lib/queries';
 import { stringToProper } from '../../lib/util';
 import NavLinks from './NavLinks';
 
-const CategoryNav = ({ activeWhite }) => {
+const CategoryNav = ({ activeWhite, customStyles }) => {
     return (
         <Query
             query={LIST_TAGS}
         >
-            {({ data }) => {
-                if (!data) return null;
+            {({ data, error }) => {
+                let links = [
+                    {
+                        label: 'All',
+                        to: '/blog',
+                    }
+                ];
 
-                let links = data.tags.map(({ name}) => ({
-                    label: stringToProper(name),
-                    to: `/blog/${name}`,
-                }));
-
-                links.unshift({
-                    label: 'All',
-                    to: '/blog',
-                })
+                if (data && data.tags !== undefined)
+                    links = data.tags.map(({ name }) => ({
+                        label: stringToProper(name),
+                        to: `/blog/${name}`,
+                    }));
 
                 return (
                 <NavLinks
                     activeWhite={activeWhite}
                     linkSections={[links]}
+                    customStyles={customStyles}
                 />
                 );
             }}
         </Query>
     );
+};
+
+CategoryNav.defaultProps = {
+    customStyles: {},
 };
 
 export default CategoryNav;
