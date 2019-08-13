@@ -9,13 +9,13 @@ import SubscribeButton from '../components/blog/SubscribeButton';
 import Banner from '../components/blog/Banner';
 import Footer from '../components/blog/Footer';
 import CategoryNav from '../components/blog/CategoryNav';
+import ImageCaption from '../components/blog/ImageCaption';
 
-const Blog = (props) => {
-    let { category, pathname } = props;
+const Blog = ({ category, toggleSidebar }) => {
         return (
             <div id={'page-root'} className={'blog-page'}>
                 <Head/>
-                <Banner/>
+                <Banner toggleSidebar={toggleSidebar} />
                 <main
                     className={'content'}
                     style={{
@@ -39,10 +39,14 @@ const Blog = (props) => {
                 </main>
                 <section id={'about'} className={'about-me'}>
                     <div className={'about-content'} >
-                        <img
-                            src="/static/img/nieky-1871.jpg"
-                        />
                         <div>
+                            <img
+                                // src="/static/img/nieky-1871.jpg"
+                                src={'https://res.cloudinary.com/jenasnelling/image/upload/fl_progressive/v1565484375/05222019_NAllen-31_twse6f.jpg'}
+                            />
+                            <ImageCaption text={'By Jena Snelling'} />
+                        </div>
+                        <div style={{ width: '96%', }} >
                             <h1>About Me</h1>
                             <p style={{ paddingTop: '10px', opacity: 0.7, maxWidth: '100%' }}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
