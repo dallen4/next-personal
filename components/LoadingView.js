@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarLoader } from 'react-spinners';
 
-const LoadingView = ({ loading, message, error, errorMsg, fullscreen }) => {
+const LoadingView = ({ loading, message, error, errorMsg, fullscreen, dark }) => {
     return (
         <div
             style={{
@@ -24,7 +24,7 @@ const LoadingView = ({ loading, message, error, errorMsg, fullscreen }) => {
                     loading={loading && !error}
                 />
             </div>
-            <p style={{ color: 'white' }} >{error ? errorMsg : message}</p>
+            <p style={dark ? {} : { color: 'white' }} >{error ? errorMsg : message}</p>
         </div>
     );
 }
@@ -34,6 +34,7 @@ LoadingView.defaultProps = {
     message: 'loading...',
     error: null,
     fullscreen: true,
+    dark: false,
 };
 
 export default LoadingView;
