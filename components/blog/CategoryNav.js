@@ -18,10 +18,10 @@ const CategoryNav = ({ activeWhite, customStyles }) => {
                 ];
 
                 if (data && data.tags !== undefined)
-                    links = data.tags.map(({ name }) => ({
+                    links.push(...data.tags.map(({ name }) => ({
                         label: stringToProper(name),
                         to: `/blog/${name}`,
-                    }));
+                    })));
 
                 return (
                 <NavLinks
