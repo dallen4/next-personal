@@ -14,6 +14,13 @@ export default class SubscribeModal extends Component {
                     overlay: {
                         backgroundColor: 'rgba(0,0,0,0.5)',
                     },
+                    content: {
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        border: 0,
+                    }
                 }}
             >
                 <style jsx>{`
