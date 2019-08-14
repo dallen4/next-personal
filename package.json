@@ -8,7 +8,8 @@
   "private": false,
   "scripts": {
     "start": "node server.js",
-    "build": "next build && NODE_ENV=production node server.js",
+    "start:prod": "NODE_ENV=production node server.js",
+    "build": "next build",
     "export": "next export",
     "snyk": "snyk test"
   },
