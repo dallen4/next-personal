@@ -3,6 +3,7 @@ import { writePalette } from '../styles/colors';
 
 export default ({ onClick, label, disabled }) => (
     <button
+        title={label}
         style={{
             width: '120px',
             padding: '10px',

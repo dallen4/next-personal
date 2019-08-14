@@ -30,6 +30,7 @@ const SidebarMenu = ({ toggleSidebar }) => {
                 }}
             >
                 <button
+                    title={'close'}
                     onClick={toggleSidebar}
                     style={{
                         backgroundColor: 'transparent',

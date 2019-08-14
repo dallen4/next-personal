@@ -35,6 +35,7 @@ export default class SubscribeModal extends Component {
                 `}</style>
                 <h3>Subscriptions coming soon!</h3>
                 <button
+                    title={'close'}
                     style={{
                         backgroundColor: 'rgb(23,171,141)',
                         color: 'white',

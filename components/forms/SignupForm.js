@@ -150,6 +150,7 @@ class SignupForm extends Component {
                             )}
                             <br />
                             <button
+                                title={'signup'}
                                 disabled={loading || !canSignUp}
                                 className='button'
                                 style={{ marginTop: '15px' }}

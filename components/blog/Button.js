@@ -9,6 +9,7 @@ export default function Button({ label, color, onClick }) {
 
     return (
         <button
+            title={label}
             style={{
                 backgroundColor,
                 color: 'white',
