@@ -5,6 +5,8 @@ const ImageCaption = ({ text }) => (
     <p
         style={{
             fontStyle: 'italic',
+            opacity: 0.75,
+            fontSize: '0.9rem',
         }}
     >{text}</p>
 )

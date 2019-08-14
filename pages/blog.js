@@ -42,7 +42,7 @@ const Blog = ({ category, toggleSidebar }) => {
                         <div>
                             <img
                                 alt={'Nieky Allen by Jena Snelling'}
-                                src={'https://res.cloudinary.com/jenasnelling/image/upload/c_scale,f_webp,fl_progressive,w_900,q_85/v1565484375/05222019_NAllen-31_twse6f.webp'}
+                                src={'https://res.cloudinary.com/jenasnelling/image/upload/c_scale,fl_progressive,w_900,q_85/v1565484375/05222019_NAllen-31_twse6f.jpg'}
                             />
                             <ImageCaption text={'By Jena Snelling'} />
                         </div>

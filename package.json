@@ -62,6 +62,6 @@
     "yarn": "1.15.2"
   },
   "devDependencies": {
-    "snyk": "^1.82.1"
+    "snyk": "1.216.2"
   }
 }
