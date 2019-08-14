@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     FaGithub,
-    FaFacebookF,
     FaTwitter,
-    FaInstagram,
+    FaSoundcloud,
 } from 'react-icons/fa';
 import Icon from 'efflux-icons';
 
@@ -33,27 +32,27 @@ function SocialLinks(props) {
                 }
             `}</style>
             <li>
-                <a>
+                <a href={'https://github.com/dallen4'} >
                     <FaGithub {...iconProps} />
                 </a>
             </li>
             <li>
-                <a>
-                    <FaFacebookF {...iconProps} />
-                </a>
-            </li>
-            <li>
-                <a>
+                <a href={'https://twitter.com/nieky_allen'} >
                     <FaTwitter {...iconProps} />
                 </a>
             </li>
             <li>
-                <a>
+                <a href={'https://instagram.com/nieky.m4a'} >
                     <Icon
                         name={'Instagram'}
                         color={color}
                         size={20}
                     />
+                </a>
+            </li>
+            <li>
+                <a href={'https://soundcloud.com/niekya'} >
+                    <FaSoundcloud {...iconProps} />
                 </a>
             </li>
         </ul>
