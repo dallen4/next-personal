@@ -2,7 +2,7 @@
 const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
-const { graphqlApi } = require('./api');
+require('dotenv').config();
 
 // import express middlewares
 const cors = require('cors');
@@ -10,7 +10,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 const dev = process.env.NODE_ENV !== 'production';
 
 // init next app
@@ -36,28 +36,37 @@ app.prepare().then(() => {
     let logMode = dev ? 'dev' : 'combined';
     server.use(morgan(logMode));
 
-    // mount graphql endpoint
-    graphqlApi.applyMiddleware({
-        app: server,
-        path: '/api',
+    // handle parameterized routes for /blog
+    server.get('/blog/:category', (req, res) => {
+        const mergedQuery = Object.assign({}, req.query, req.params);
+        return app.render(req, res, '/blog', mergedQuery);
     });
 
+    // handle parameterized routes for /post
+    server.get('/post/:slug', (req, res) => {
+        const mergedQuery = Object.assign({}, req.query, req.params);
+        return app.render(req, res, '/post', mergedQuery);
+    });
+
+    // if prod, render index route with cache
     if (!dev)
         server.get('/', (req, res) => {
             renderWithCache(req, res, '/');
         });
 
+    // default handler
     server.get('*', (req, res) => {
         return handler(req, res);
     });
 
     server.listen(PORT, (err) => {
         if (err) throw err;
-        console.log(`server started on port ${PORT}...`);
+        console.log(`server started on port ${PORT}...\n`);
     });
 
 }).catch(error => console.error(error));
 
+// checks if page exists in cache, generates html if need be
 async function renderWithCache(req, res, pagePath, queryParams) {
 
     const key = `${req.url}`;
@@ -65,7 +74,6 @@ async function renderWithCache(req, res, pagePath, queryParams) {
     // if page is cached, send from cache
     if (ssrCache.has(key)) {
         res.setHeader('x-cache', 'HIT');
-        console.log('sending from cache');
         res.send(ssrCache.get(key));
         return;
     }

@@ -1,4 +1,4 @@
-import { colorPalette } from '../../config/color';
+import { homePalette } from '../../styles/colors';
 
 const styles = {
     footer: {
@@ -10,6 +10,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
+        // backgroundColor: 'inherit',
     },
     linkContainer: {
         flex: 1,
@@ -22,7 +23,7 @@ const styles = {
         margin: '17px',
     },
     icon: {
-        color: colorPalette.white,
+        color: homePalette.white,
         size: 25,
     },
     copyrightContainer: {
@@ -35,7 +36,7 @@ const styles = {
     copyright: {
         margin: 0,
         padding: 0,
-        color: colorPalette.white,
+        color: homePalette.white,
     },
 };
 

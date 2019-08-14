@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import VisibilitySensor from 'react-visibility-sensor';
 import ScrollIndicatorPage from '../components/ScrollIndicatorPage';
 import CircleGraph from '../components/CircleGraph';
@@ -15,8 +14,9 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { IoLogoNodejs } from 'react-icons/io';
 import '../styles/index.css';
 import { styles } from '../styles';
-import { colorPalette } from '../config/color';
 import Footer from '../components/Footer';
+import { homePalette } from '../styles/colors';
+import Head from '../components/Head';
 
 // init with default values to compensate for SSR
 let scrollToComponent = () => {};
@@ -34,7 +34,6 @@ export default class Home extends React.Component {
 
         this.updateActiveSection = this.updateActiveSection.bind(this);
         this.backToTop = this.backToTop.bind(this);
-        this.renderMeta = this.renderMeta.bind(this);
         this.renderNavLinks = this.renderNavLinks.bind(this);
     }
 
@@ -66,20 +65,6 @@ export default class Home extends React.Component {
             this.setState({ isScrolling: false });
         });
     };
-
-    renderMeta = () => (
-        <Head>
-            <title>Nieky Allen</title>
-            <meta charSet="utf-8" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-            <meta name="theme-color" content="#000000" />
-            <meta name="description" content="personal website for Nieky Allen" />
-            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        </Head>
-    );
 
     renderNavLinks() {
         let { activeSection } = this.state;
@@ -144,7 +129,12 @@ export default class Home extends React.Component {
 
         return (
             <ScrollIndicatorPage>
-                {this.renderMeta()}
+                <Head/>
+                <style global jsx>{`
+                    body {
+                        background: rgb(51, 54, 57);
+                    }
+                `}</style>
                 {this.renderNavLinks()}
                 <div style={backToTopButtonStyles}>
                     <FiChevronUp
@@ -338,6 +328,7 @@ export default class Home extends React.Component {
                                                 <div style={styles.iconContainer}>
                                                     <div style={styles.iconVisualsWrapper}>
                                                         <img
+                                                            alt={'JavaScript logo'}
                                                             src="/static/img/language-javascript.png"
                                                             style={styles.icon}
                                                             // used to be 65x65 (wxh)
@@ -345,7 +336,7 @@ export default class Home extends React.Component {
                                                         <CircleGraph
                                                             size="120px"
                                                             percentage={90}
-                                                            barColor={colorPalette.orange}
+                                                            barColor={homePalette.orange}
                                                             animate
                                                         />
                                                     </div>
@@ -354,13 +345,14 @@ export default class Home extends React.Component {
                                                 <div style={styles.iconContainer}>
                                                     <div style={styles.iconVisualsWrapper} >
                                                         <img
+                                                            alt={'React.js logo'}
                                                             src="/static/img/React-icon.png"
                                                             style={styles.icon}
                                                         />
                                                         <CircleGraph
                                                             size="120px"
                                                             percentage={85}
-                                                            barColor={colorPalette.blue}
+                                                            barColor={homePalette.blue}
                                                             animate
                                                         />
                                                     </div>
@@ -376,7 +368,7 @@ export default class Home extends React.Component {
                                                         <CircleGraph
                                                             size="120px"
                                                             percentage={85}
-                                                            barColor={colorPalette.green}
+                                                            barColor={homePalette.green}
                                                             animate
                                                         />
                                                     </div>
@@ -561,6 +553,7 @@ export default class Home extends React.Component {
                                                     <div style={styles.closedProjectContainer} >
                                                         <a href="https://www.axlry.com" >
                                                             <img
+                                                                alt={'AXLRY logo'}
                                                                 src="/static/img/axlry-logo.png"
                                                                 style={styles.axlryLogo}
                                                             />
@@ -580,6 +573,7 @@ export default class Home extends React.Component {
                                                             style={styles.btbBackground}
                                                         >
                                                             <img
+                                                                alt={'Bigger Than Basketball logo'}
                                                                 src="https://res.cloudinary.com/bigger-than-basketball/image/upload/fl_progressive/Bigger_Than_Basketball_LOGO_high_res.png"
                                                                 style={styles.btbLogo}
                                                             />

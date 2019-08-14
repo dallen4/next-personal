@@ -1,6 +1,6 @@
 // Home route styles
 
-import { colorPalette } from '../config/color';
+import { homePalette } from './colors';
 
 const styles = {
     navContainer: {
@@ -16,7 +16,7 @@ const styles = {
     navLink: {
         display: 'inline-block',
         padding: '4px',
-        backgroundColor: colorPalette.white,
+        backgroundColor: homePalette.white,
         borderRadius: '4px',
     },
     backTopButton: {
@@ -46,18 +46,18 @@ const styles = {
     },
     homeSectionH1: {
         fontSize: '1.8rem',
-        color: colorPalette.green,
+        color: homePalette.green,
     },
     homeSectionH2: {
-        color: colorPalette.blue,
+        color: homePalette.blue,
     },
     homeSectionH3: {
-        color: colorPalette.orange,
+        color: homePalette.orange,
     },
     aboutSectionContainer: {
         minHeight: '70vh',
         width: '100%',
-        backgroundColor: colorPalette.gray,
+        backgroundColor: homePalette.gray,
     },
     aboutSectionContent: {
         minHeight: '100%',
@@ -74,7 +74,7 @@ const styles = {
         margin: 0,
         padding: 0,
         marginTop: '110px',
-        color: colorPalette.orange,
+        color: homePalette.orange,
         fontSize: '1.8rem',
     },
     aboutSectionBodyContainer: {
@@ -95,14 +95,14 @@ const styles = {
         display: 'inline',
         margin: 0,
         padding: 0,
-        color: colorPalette.green,
+        color: homePalette.green,
     },
     aboutSectionInfoValue: {
         display: 'inline',
         margin: 0,
         padding: 0,
         paddingLeft: '12px',
-        color: colorPalette.white,
+        color: homePalette.white,
     },
     aboutSectionInfoEduItem: {
         marginBottom: '7px',
@@ -111,12 +111,12 @@ const styles = {
         margin: 0,
         marginBottom: '7px',
         padding: 0,
-        color: colorPalette.green,
+        color: homePalette.green,
     },
     aboutSectionInfoEduLabel: {
         margin: 0,
         padding: 0,
-        color: colorPalette.white,
+        color: homePalette.white,
     },
     degreeLabel: {
         paddingRight: '2px'
@@ -128,7 +128,7 @@ const styles = {
     aboutSectionInfoEduValue: {
         margin: 0,
         padding: 0,
-        color: colorPalette.white,
+        color: homePalette.white,
         paddingLeft: '12px',
         fontSize: '0.9rem',
     },
@@ -184,7 +184,7 @@ const styles = {
     techSectionContainer: {
         minHeight: '100vh',
         height: 'auto',
-        backgroundColor: colorPalette.gray,
+        backgroundColor: homePalette.gray,
     },
     techSectionContentContainer: {
         minHeight: '100vh',
@@ -224,7 +224,7 @@ const styles = {
         height: '60px',
     },
     iconLabel: {
-        color: colorPalette.white,
+        color: homePalette.white,
     },
     barGraphColumnContainer: {
         flex: 1,
@@ -251,7 +251,7 @@ const styles = {
     },
     barGraphLabel: {
         display: 'inline',
-        color: colorPalette.white,
+        color: homePalette.white,
         fontSize: '0.9rem',
         width: 'auto',
     },
@@ -262,13 +262,13 @@ const styles = {
     },
     bar: {
         height: '100%',
-        backgroundColor: colorPalette.blue,
+        backgroundColor: homePalette.blue,
     },
     barPrecentage: {
         display: 'inline',
         fontSize: '14px',
         marginLeft: '3px',
-        color: colorPalette.white,
+        color: homePalette.white,
     },
     projectsContainer: {
         minHeight: '100vh',
@@ -306,11 +306,11 @@ const styles = {
         justifyContent: 'flex-start',
     },
     projectsSectionHeader: {
-        color: colorPalette.orange,
+        color: homePalette.orange,
     },
     projectsSectionHeaderArrow: {
         paddingLeft: '5px',
-        color: colorPalette.green,
+        color: homePalette.green,
     },
     closedProjectContainer: {
         flex: 1,

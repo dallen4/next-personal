@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800');
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700,800');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     top: 0;
     margin: 0;
@@ -9,7 +13,11 @@ body {
     height: 100%;
     width: 100%;
     font-family: 'Montserrat', 'Open Sans', monospace;
-    background-color: rgb(51, 54, 57);
+}
+
+h3, p {
+    margin: 0;
+    padding: 0;
 }
 
 .code {
@@ -21,6 +29,25 @@ body {
     width: 100%;
 }
 
+button, input {
+    border: none;
+    outline: none;
+}
+
+button:hover, a:hover {
+    cursor: pointer;
+}
+
 .button:hover {
     cursor: pointer;
+}
+
+.sidebar {
+    min-width: 300px;
+}
+
+@media only screen and (max-width: 500px) {
+    .sidebar {
+        width: 100vw;
+    }
 }
