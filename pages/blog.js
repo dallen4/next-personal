@@ -41,8 +41,8 @@ const Blog = ({ category, toggleSidebar }) => {
                     <div className={'about-content'} >
                         <div>
                             <img
-                                // src="/static/img/nieky-1871.jpg"
-                                src={'https://res.cloudinary.com/jenasnelling/image/upload/fl_progressive/v1565484375/05222019_NAllen-31_twse6f.jpg'}
+                                alt={'Nieky Allen by Jena Snelling'}
+                                src={'https://res.cloudinary.com/jenasnelling/image/upload/fl_progressive,w_1000/v1565484375/05222019_NAllen-31_twse6f.jpg'}
                             />
                             <ImageCaption text={'By Jena Snelling'} />
                         </div>

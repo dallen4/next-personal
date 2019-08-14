@@ -18,7 +18,11 @@ const DesktopNav = (
     <nav id={'desktop-header'} className={'navbar'}>
         <Link href="/blog">
             <a>
-                <img src={'/static/img/nieky-logo-2.svg'} height={'30px'} />
+                <img
+                    alt={'Nieky Allen logo'}
+                    src={'/static/img/nieky-logo-2.svg'}
+                    height={'30px'}
+                />
             </a>
         </Link>
 
@@ -165,6 +169,7 @@ const Post = ({ slug, toggleSidebar }) => (
                         </header>
                         <section className={'banner-img'}>
                             <img
+                                alt={'banner image'}
                                 src={
                                     imageUrl ||
                                     'https://images.unsplash.com/photo-1565094919597-70e3022e7c4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80'

@@ -328,6 +328,7 @@ export default class Home extends React.Component {
                                                 <div style={styles.iconContainer}>
                                                     <div style={styles.iconVisualsWrapper}>
                                                         <img
+                                                            alt={'JavaScript logo'}
                                                             src="/static/img/language-javascript.png"
                                                             style={styles.icon}
                                                             // used to be 65x65 (wxh)
@@ -344,6 +345,7 @@ export default class Home extends React.Component {
                                                 <div style={styles.iconContainer}>
                                                     <div style={styles.iconVisualsWrapper} >
                                                         <img
+                                                            alt={'React.js logo'}
                                                             src="/static/img/React-icon.png"
                                                             style={styles.icon}
                                                         />
@@ -551,6 +553,7 @@ export default class Home extends React.Component {
                                                     <div style={styles.closedProjectContainer} >
                                                         <a href="https://www.axlry.com" >
                                                             <img
+                                                                alt={'AXLRY logo'}
                                                                 src="/static/img/axlry-logo.png"
                                                                 style={styles.axlryLogo}
                                                             />
@@ -570,6 +573,7 @@ export default class Home extends React.Component {
                                                             style={styles.btbBackground}
                                                         >
                                                             <img
+                                                                alt={'Bigger Than Basketball logo'}
                                                                 src="https://res.cloudinary.com/bigger-than-basketball/image/upload/fl_progressive/Bigger_Than_Basketball_LOGO_high_res.png"
                                                                 style={styles.btbLogo}
                                                             />
