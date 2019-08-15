@@ -6,7 +6,7 @@ import CategoryNav from './CategoryNav';
 import Icon from 'efflux-icons';
 
 export const MobileHeader = ({ toggleSidebar }) => (
-    <header id={'mobile-header'} className={'blog-header navbar'}>
+    <header id={'mobile-header'} className={'blog-header navbar'} style={{ backgroundColor: 'rgb(21,24,28)' }}>
         <div onClick={toggleSidebar} style={{ alignSelf: 'flex-start' }}>
             <Icon name={'Menu'} color={'white'} size={'35px'} />
             <img
@@ -44,7 +44,7 @@ export const MobileHeader = ({ toggleSidebar }) => (
 
 const Header = () => {
     return (
-        <header id={'desktop-header'} className={'blog-header'}>
+        <header id={'desktop-header'} className={'blog-header'} >
             <Link href="/blog">
                 <a style={{ alignSelf: 'flex-start' }} >
                     <img src={'/static/img/nieky-logo-2.svg'} height={'30px'} />
@@ -60,6 +60,7 @@ const Header = () => {
                 <CategoryNav activeWhite />
                 <NavLinks
                     renderDot
+                    activeWhite
                     linkSections={[
                         [
                             {
