@@ -14,7 +14,7 @@ import NavLinks from '../components/blog/NavLinks';
 import CategoryNav from '../components/blog/CategoryNav';
 import { MobileHeader } from '../components/blog/Header';
 
-const DesktopNav = (
+export const DesktopNav = (
     <nav id={'desktop-header'} className={'navbar'}>
         <Link href="/blog">
             <a>
@@ -32,9 +32,10 @@ const DesktopNav = (
                 justifyContent: 'flex-end',
             }}
         >
-            <CategoryNav />
+            <CategoryNav activeWhite />
             <NavLinks
                 renderDot
+                activeWhite
                 linkSections={[
                     [
                         {
@@ -89,12 +90,12 @@ const Post = ({ slug, toggleSidebar }) => (
 
                 return (
                     <div id={'page-root'} className={'post-page'}>
-                        <Head />
+                        <Head title={title} />
                         <link
                             rel='stylesheet'
                             href='https://highlightjs.org/static/demo/styles/railscasts.css'
                         />
-                        <div
+                        {/* <div
                             style={{
                                 position: 'fixed',
                                 bottom: 0,
@@ -107,18 +108,18 @@ const Post = ({ slug, toggleSidebar }) => (
                             }}
                         >
                             <a href={'#page-root'} >
-                            <FiArrowUp
-                                className={'button'}
-                                size={35}
-                                color='white'
-                                strokeWidth={'0.5px'}
-                            />
-                            <p style={{ padding: 0 }}>Top</p>
+                                <FiArrowUp
+                                    className={'button'}
+                                    size={35}
+                                    color='white'
+                                    strokeWidth={'0.5px'}
+                                />
+                                <p style={{ padding: 0 }}>Top</p>
                             </a>
-                        </div>
+                        </div> */}
                         {MobileHeader({ toggleSidebar: toggleSidebar })}
                         {DesktopNav}
-                        <header className={'title'}>
+                        <section className={'title'}>
                             <Link href='/blog'>
                                 <a
                                     style={{
@@ -166,7 +167,7 @@ const Post = ({ slug, toggleSidebar }) => (
                                     last updated {updatedString}
                                 </p>
                             )}
-                        </header>
+                        </section>
                         <section className={'banner-img'}>
                             <img
                                 alt={'banner image'}
