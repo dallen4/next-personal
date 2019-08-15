@@ -44,7 +44,7 @@ export const MobileHeader = ({ toggleSidebar }) => (
 
 const Header = () => {
     return (
-        <header id={'desktop-header'} className={'blog-header'} >
+        <header id={'desktop-header'} className={'blog-header'}>
             <Link href="/blog">
                 <a style={{ alignSelf: 'flex-start' }} >
                     <img src={'/static/img/nieky-logo-2.svg'} height={'30px'} />
