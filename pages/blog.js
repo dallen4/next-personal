@@ -14,7 +14,7 @@ import ImageCaption from '../components/blog/ImageCaption';
 const Blog = ({ category, toggleSidebar }) => {
     return (
         <div id={'page-root'} className={'blog-page'}>
-            <Head />
+            <Head title={'Nieky Allen - Blog'} />
             <Banner toggleSidebar={toggleSidebar} />
             <main
                 className={'content'}

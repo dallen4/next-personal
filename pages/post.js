@@ -12,7 +12,7 @@ import { formatDate } from '../lib/util';
 import CategoryLink from '../components/blog/CategoryLink';
 import NavLinks from '../components/blog/NavLinks';
 import CategoryNav from '../components/blog/CategoryNav';
-import Header, { MobileHeader } from '../components/blog/Header';
+import { MobileHeader } from '../components/blog/Header';
 
 export const DesktopNav = (
     <nav id={'desktop-header'} className={'navbar'}>
@@ -90,7 +90,7 @@ const Post = ({ slug, toggleSidebar }) => (
 
                 return (
                     <div id={'page-root'} className={'post-page'}>
-                        <Head />
+                        <Head title={title} />
                         <link
                             rel='stylesheet'
                             href='https://highlightjs.org/static/demo/styles/railscasts.css'

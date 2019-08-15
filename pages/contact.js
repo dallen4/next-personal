@@ -43,7 +43,7 @@ export default ({ toggleSidebar }) => {
                     grid-area: footer;
                 }
             `}</style>
-            <Head/>
+            <Head title={'Nieky Allen - Contact'} />
             {DesktopNav}
             <MobileHeader
                 toggleSidebar={toggleSidebar}

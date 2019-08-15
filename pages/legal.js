@@ -47,7 +47,7 @@ export default ({ toggleSidebar }) => {
                     grid-area: footer;
                 }
             `}</style>
-            <Head />
+            <Head title={'Nieky Allen - Legal'} />
             {DesktopNav}
             <MobileHeader toggleSidebar={toggleSidebar} />
             <main className={'content'}>
