@@ -12,82 +12,97 @@ import CategoryNav from '../components/blog/CategoryNav';
 import ImageCaption from '../components/blog/ImageCaption';
 
 const Blog = ({ category, toggleSidebar }) => {
-        return (
-            <div id={'page-root'} className={'blog-page'}>
-                <Head/>
-                <Banner toggleSidebar={toggleSidebar} />
-                <main
-                    className={'content'}
+    return (
+        <div id={'page-root'} className={'blog-page'}>
+            <Head />
+            <Banner toggleSidebar={toggleSidebar} />
+            <main
+                className={'content'}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <div
                     style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
+                        minWidth: '30%',
+                        maxWidth: 'auto',
+                        alignSelf: 'flex-end',
+                        paddingBottom: '20px',
+                        overflowX: 'scroll',
                     }}
                 >
-                    <div
-                        style={{
-                            minWidth: '30%',
-                            maxWidth: 'auto',
-                            alignSelf: 'flex-end',
-                            paddingBottom: '20px',
-                            overflowX: 'scroll',
-                        }}
-                    >
-                        <CategoryNav/>
+                    <CategoryNav />
+                </div>
+                <PostList category={category} />
+            </main>
+            <section id={'about'} className={'about-me'}>
+                <div className={'about-content'}>
+                    <div style={{ float: 'left' }}>
+                        <img
+                            alt={'Nieky Allen by Jena Snelling'}
+                            src={
+                                'https://res.cloudinary.com/jenasnelling/image/upload/c_scale,fl_progressive,w_900,q_85/v1565484375/05222019_NAllen-31_twse6f.jpg'
+                            }
+                        />
+                        <ImageCaption text={'By Jena Snelling'} />
                     </div>
-                    <PostList category={category} />
-                </main>
-                <section id={'about'} className={'about-me'}>
-                    <div className={'about-content'} >
-                        <div>
-                            <img
-                                alt={'Nieky Allen by Jena Snelling'}
-                                src={'https://res.cloudinary.com/jenasnelling/image/upload/c_scale,fl_progressive,w_900,q_85/v1565484375/05222019_NAllen-31_twse6f.jpg'}
-                            />
-                            <ImageCaption text={'By Jena Snelling'} />
-                        </div>
-                        <div style={{ width: '96%', }} >
-                            <h1>About Me</h1>
-                            <p style={{ paddingTop: '10px', opacity: 0.7, maxWidth: '100%' }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit
-                                esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                                sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
+                    <div style={{ maxWidth: '96%' }}>
+                        <h1>About Me</h1>
+                        <p style={{ paddingTop: '10px', opacity: 0.7 }}>
+                            If you enjoy writing in a variety of forms and topic areas
+                            that might include poetry, music, technology, think pieces,
+                            and more, then you might be in the right place. I have thought
+                            about making a blog at least a dozen times and decided to take
+                            the leap after some encouragement from friends and colleagues.
+                            <br />
+                            <br />
+                            Who am I? I’m a techy, poet & lyricist, software engineer,
+                            educator, entrepreneur, and hip-hop head who is constantly
+                            trying to discover new ways to combine my love for music with
+                            my love for technology. I grew up in Kansas City, but moved to
+                            Chicago for college where I received a B.S. in Software
+                            Engineering with minors in Communications and Computer Crime &
+                            Forensics and a M.S. in Software Engineering from Loyola
+                            University Chicago.
+                            <br />
+                            <br />I hope you like what you read and even if you don’t,
+                            thank you for giving it a chance. If you have any questions,
+                            comments, or requests for post topics or content suggestions,
+                            please don’t hesitate to contact me on social media or you can
+                            always email me.
+                        </p>
                     </div>
-                </section>
-                <section className={'subscribe'}>
-                    <h1
-                        style={{
-                            fontSize: '2.5rem',
-                            color: 'rgb(38,38,38)',
-                        }}
-                    >
-                        Keep Reading
-                    </h1>
-                    <p style={{ textAlign: 'center' }}>
-                        Subscribe to your favorite topics and be notified of
-                        <br />
-                        new blog posts
-                    </p>
+                </div>
+            </section>
+            <section className={'subscribe'}>
+                <h1
+                    style={{
+                        fontSize: '2.5rem',
+                        color: 'rgb(38,38,38)',
+                    }}
+                >
+                    Keep Reading
+                </h1>
+                <p style={{ textAlign: 'center' }}>
+                    Subscribe to your favorite topics and be notified of
+                    <br />
+                    new blog posts
+                </p>
 
-                    <div
-                        style={{
-                            height: '3px',
-                            width: '70px',
-                            backgroundColor: 'rgb(237,56,57)',
-                        }}
-                    />
-                    <SubscribeButton />
-                </section>
-                <Footer />
-            </div>
-        );
+                <div
+                    style={{
+                        height: '3px',
+                        width: '70px',
+                        backgroundColor: 'rgb(237,56,57)',
+                    }}
+                />
+                <SubscribeButton />
+            </section>
+            <Footer />
+        </div>
+    );
 };
 
 Blog.getInitialProps = async ({ query, pathname }) => {
@@ -95,6 +110,6 @@ Blog.getInitialProps = async ({ query, pathname }) => {
         pathname,
         category: query.category,
     };
-}
+};
 
 export default Blog;
