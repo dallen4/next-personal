@@ -6,6 +6,7 @@ import {
     FaSoundcloud,
 } from 'react-icons/fa';
 import Icon from 'efflux-icons';
+import { FiMail } from 'react-icons/fi';
 
 function SocialLinks(props) {
 
@@ -53,6 +54,11 @@ function SocialLinks(props) {
             <li>
                 <a href={'https://soundcloud.com/niekya'} >
                     <FaSoundcloud {...iconProps} />
+                </a>
+            </li>
+            <li>
+                <a href={'mailto:nieky.allen@gmail.com'} >
+                    <FiMail {...iconProps} />
                 </a>
             </li>
         </ul>
