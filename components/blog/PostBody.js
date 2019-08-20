@@ -28,7 +28,7 @@ const PostBody = ({ body }) => {
                 },
             }}
         >
-            {body}
+            {body.replace(/[\n\r]/g, '  \n')}
         </Markdown>
     );
 };
