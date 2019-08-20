@@ -1,9 +1,11 @@
-import App, { Container } from 'next/app';
 import React from 'react';
-import '../styles/base.css';
+import App, { Container } from 'next/app';
+import Router from 'next/router';
 import withClient from '../lib/client/withClient';
 import { ApolloProvider } from 'react-apollo';
+import withGAnalytics from 'next-ga';
 import Sidebar from 'react-sidebar';
+import '../styles/base.css';
 import SidebarMenu from '../components/blog/SidebarMenu';
 
 class MyApp extends App {
@@ -39,4 +41,7 @@ class MyApp extends App {
     }
 }
 
-export default withClient(MyApp);
+const AppWithApollo = withClient(MyApp);
+const AppWithAnalytics = withGAnalytics(process.env.GOOGLE_ANALYTICS_ID, Router)(AppWithApollo);
+
+export default AppWithAnalytics;
