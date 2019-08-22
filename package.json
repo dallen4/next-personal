@@ -36,6 +36,7 @@
     "next-ga": "^2.3.4",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
+    "react-apollo": "^3.0.1",
     "react-dom": "^16.8.6",
     "react-ga": "^2.6.0",
     "react-highlight.js": "^1.0.7",
