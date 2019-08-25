@@ -90,7 +90,7 @@ const Post = ({ slug, toggleSidebar }) => {
 
         return (
             <div id={'page-root'} className={'post-page'}>
-                <Head title={title} />
+                <Head title={`${title} | Nieky Allen`} />
                 <link
                     rel="stylesheet"
                     href="https://highlightjs.org/static/demo/styles/railscasts.css"
