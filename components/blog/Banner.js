@@ -70,8 +70,7 @@ export default function Banner({ toggleSidebar }) {
                     style={{
                         height: '100%',
                         width: '100%',
-                        background: `url('${imageUrl}') no-repeat`,
-                        backgroundSize: 'cover',
+                        background: `url('${imageUrl}') left top / cover no-repeat`,
                     }}
                 >
                     <div
