@@ -2,7 +2,7 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Router from 'next/router';
 import ReactGA from 'react-ga';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import Sidebar from 'react-sidebar';
 import withClient from '../lib/client/withClient';
 import '../styles/base.css';

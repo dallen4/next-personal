@@ -122,7 +122,8 @@ ul {
 }
 
 .body-text {
-    line-height: 30px;
+    line-height: 25px;
+    padding-bottom: 20px;
 }
 
 .content code {
@@ -229,7 +230,7 @@ ul {
 
     .post-item {
         flex: 0.5;
-        padding: 10px 25px;
+        padding: 10px;
     }
 
     .banner-content {

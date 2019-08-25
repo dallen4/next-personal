@@ -1,38 +1,35 @@
 import React from 'react';
-import { Query } from 'react-apollo';
 import { LIST_TAGS } from '../../lib/queries';
 import { stringToProper } from '../../lib/util';
 import NavLinks from './NavLinks';
+import { useQuery } from '@apollo/react-hooks';
 
-const CategoryNav = ({ activeWhite, customStyles }) => {
+const CategoryNav = function({ activeWhite, customStyles }) {
+    const { loading, error, data, fetchMore, networkStatus } = useQuery(LIST_TAGS, {
+        notifyOnNetworkStatusChange: true,
+    });
+
+    let links = [
+        {
+            label: 'All',
+            to: '/blog',
+        }
+    ];
+
+    if (data && data.tags !== undefined)
+        links.push(...data.tags.map(({ name }) => ({
+            label: stringToProper(name),
+            to: `/blog/${name}`,
+        })));
+
     return (
-        <Query
-            query={LIST_TAGS}
-        >
-            {({ data, error }) => {
-                let links = [
-                    {
-                        label: 'All',
-                        to: '/blog',
-                    }
-                ];
-
-                if (data && data.tags !== undefined)
-                    links.push(...data.tags.map(({ name }) => ({
-                        label: stringToProper(name),
-                        to: `/blog/${name}`,
-                    })));
-
-                return (
-                <NavLinks
-                    activeWhite={activeWhite}
-                    linkSections={[links]}
-                    customStyles={customStyles}
-                />
-                );
-            }}
-        </Query>
+    <NavLinks
+        activeWhite={activeWhite}
+        linkSections={[links]}
+        customStyles={customStyles}
+    />
     );
+
 };
 
 CategoryNav.defaultProps = {

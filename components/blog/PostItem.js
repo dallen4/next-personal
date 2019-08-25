@@ -11,6 +11,7 @@ const PostItem = ({ post }) => {
             className={'post-item'}
             style={{
                 minHeight: '120px',
+                maxHeight: 'auto',
                 borderRadius: '6px',
                 display: 'flex',
                 flexDirection: 'row',
@@ -34,13 +35,23 @@ const PostItem = ({ post }) => {
                 <div
                     className={'post-thumbnail'}
                     style={{
-                        flex: 1,
-                        objectFit: 'cover',
-                        background: `url('${post.imageUrl}') 50% 50% no-repeat`,
                         minHeight: '120px',
+                        flex: 1,
+                        height: '120px',
                         borderRadius: '4px',
+                        overflow: 'hidden',
                     }}
-                />
+                >
+                    <img
+                        src={post.imageUrl}
+                        style={{
+                            maxHeight: '100%',
+                            width: '100%',
+                            objectFit: 'contain',
+                            borderRadius: '4px',
+                        }}
+                    />
+                </div>
             )}
             <div
                 style={{
