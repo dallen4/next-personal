@@ -124,7 +124,9 @@ const Post = ({ slug, toggleSidebar }) => {
                                 color: 'rgb(237,56,57)',
                             }}
                         >
-                            <p>back to posts</p>
+                            <p style={{ display: 'inline'}} >
+                                back to posts
+                            </p>
                         </a>
                     </Link>
                     <h1
