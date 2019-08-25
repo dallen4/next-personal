@@ -14,6 +14,8 @@ import CategoryNav from '../components/blog/CategoryNav';
 import { MobileHeader } from '../components/blog/Header';
 import { useQuery } from '@apollo/react-hooks';
 
+// image transformations: upload/c_scale,fl_progressive,w_900,q_85/v123
+
 export const DesktopNav = (
     <nav id={'desktop-header'} className={'navbar'}>
         <Link href="/blog">
