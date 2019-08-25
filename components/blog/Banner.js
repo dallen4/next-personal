@@ -64,92 +64,100 @@ export default function Banner({ toggleSidebar }) {
                     height: '100%',
                     borderBottomRightRadius: '45px',
                     overflow: 'hidden',
-                    background: `url('${imageUrl}')`,
                 }}
             >
                 <div
                     style={{
                         height: '100%',
                         width: '100%',
-                        background:
-                            'linear-gradient(to right, transparent, 25%, rgb(40,42,46))',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'flex-start',
+                        background: `url('${imageUrl}') no-repeat`,
+                        backgroundSize: 'cover',
                     }}
                 >
-                    <Header />
-                    <MobileHeader toggleSidebar={toggleSidebar} />
-                    {(loading || networkStatus === NetworkStatus.refetch || (error && !error.networkError)) ? (
-                        <LoadingView
-                            dark={true}
-                            fullscreen={false}
-                            loading={loading}
-                            error={error}
-                            errorMsg={'Issue fetching latest post...'}
-                        />
-                    ) : (
-                        <div
+                    <div
                         style={{
-                            flex: 1,
+                            height: '100%',
+                            width: '100%',
+                            background:
+                                'linear-gradient(to right, transparent, 25%, rgb(40,42,46))',
                             display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
+                            flexDirection: 'column',
+                            justifyContent: 'flex-start',
                         }}
                     >
-                        <div
-                            className={'banner-content'}
+                        <Header />
+                        <MobileHeader toggleSidebar={toggleSidebar} />
+                        {(loading || networkStatus === NetworkStatus.refetch || (error && !error.networkError)) ? (
+                            <LoadingView
+                                dark={true}
+                                fullscreen={false}
+                                loading={loading}
+                                error={error}
+                                errorMsg={'Issue fetching latest post...'}
+                            />
+                        ) : (
+                            <div
                             style={{
+                                flex: 1,
                                 display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-evenly',
-                                alignItems: 'flex-start',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
                             }}
                         >
-                            <h1 className={'post-title'}>{title}</h1>
-                            <h3
+                            <div
+                                className={'banner-content'}
                                 style={{
-                                    color: 'rgba(255,255,255,0.7)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-evenly',
+                                    alignItems: 'flex-start',
                                 }}
                             >
-                                {description}
-                            </h3>
-                            <div>
-                                <p
+                                <h1 className={'post-title'}>{title}</h1>
+                                <h3
                                     style={{
-                                        display: 'inline',
+                                        color: 'rgba(255,255,255,0.7)',
                                     }}
                                 >
-                                    {new Date(
-                                        publishedAt,
-                                    ).toLocaleDateString('en-US', {
-                                        month: 'long',
-                                        day: 'numeric',
-                                        year: 'numeric',
-                                    })}{' '}
-                                    &bull; In{' '}
+                                    {description}
+                                </h3>
+                                <div>
+                                    <p
+                                        style={{
+                                            display: 'inline',
+                                        }}
+                                    >
+                                        {new Date(
+                                            publishedAt,
+                                        ).toLocaleDateString('en-US', {
+                                            month: 'long',
+                                            day: 'numeric',
+                                            year: 'numeric',
+                                        })}{' '}
+                                        &bull; In{' '}
+                                    </p>
+                                    <CategoryLink category={tagName} />
+                                </div>
+                                <p
+                                    className={'banner-post-body'}
+                                    style={{
+                                        color: 'rgba(255,255,255,0.7)',
+                                        lineHeight: '1.5rem',
+                                    }}
+                                >
+                                    {content}
                                 </p>
-                                <CategoryLink category={tagName} />
+                                <Button
+                                    label={'Read More'}
+                                    color={'orange'}
+                                    onClick={() =>
+                                        Router.push(`/post/${slug}`)
+                                    }
+                                />
                             </div>
-                            <p
-                                className={'banner-post-body'}
-                                style={{
-                                    color: 'rgba(255,255,255,0.7)',
-                                    lineHeight: '1.5rem',
-                                }}
-                            >
-                                {content}
-                            </p>
-                            <Button
-                                label={'Read More'}
-                                color={'orange'}
-                                onClick={() =>
-                                    Router.push(`/post/${slug}`)
-                                }
-                            />
                         </div>
+                        )}
                     </div>
-                    )}
                 </div>
             </div>
         </div>
