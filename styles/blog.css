@@ -187,16 +187,26 @@ ul {
     grid-area: banner-img;
 }
 
-@media only screen and (min-width: 995px) {
+@media only screen and (min-width: 901px) {
     .posts-container {
         flex-flow: row wrap;
     }
+
+    .post-item {
+        width: calc(50% - 20px);
+        padding: 10px;
+    }
 }
 
-@media only screen and (max-width: 994px) {
+@media only screen and (max-width: 900px) {
     .posts-container {
         flex-direction: column;
         justify-content: flex-start;
+    }
+
+    .post-item {
+        width: 100%;
+        padding: 10px 0;
     }
 }
 
@@ -226,11 +236,6 @@ ul {
 
     .home-banner {
         width: calc(100vw - 45px);
-    }
-
-    .post-item {
-        flex: 0.5;
-        padding: 10px;
     }
 
     .banner-content {
@@ -290,11 +295,6 @@ ul {
 
     .banner-post-body {
         display: none;
-    }
-
-    .post-item {
-        flex: 1;
-        padding: 10px 0;
     }
 
     .banner-content {
