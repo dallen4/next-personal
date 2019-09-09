@@ -4,7 +4,6 @@ import Head from '../components/Head';
 import PostList from '../components/blog/PostList';
 import '../styles/blog.css';
 import { FiArrowUp } from 'react-icons/fi';
-import NavLinks from '../components/blog/NavLinks';
 import SubscribeButton from '../components/blog/SubscribeButton';
 import Banner from '../components/blog/Banner';
 import Footer from '../components/blog/Footer';
@@ -43,7 +42,7 @@ const Blog = ({ category, toggleSidebar }) => {
                         <img
                             alt={'Nieky Allen by Jena Snelling'}
                             src={
-                                'https://res.cloudinary.com/jenasnelling/image/upload/c_scale,fl_progressive,w_900,q_85/v1565484375/05222019_NAllen-31_twse6f.jpg'
+                                'https://res.cloudinary.com/jenasnelling/image/upload/c_scale,fl_progressive,w_900,q_85/v1567990111/05222019_NAllen-24_wmujib.jpg'
                             }
                         />
                         <ImageCaption text={'By Jena Snelling'} />
