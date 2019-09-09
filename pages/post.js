@@ -180,7 +180,7 @@ const Post = ({ slug, toggleSidebar }) => {
                         width={'100%'}
                     />
                 </section>
-                <main className={'content post-content'}>
+                <main className={'content post-content unselectable'}>
                     <PostBody body={body} />
                 </main>
                 <Footer />
